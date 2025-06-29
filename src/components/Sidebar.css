@@ -1,0 +1,80 @@
+.sidebar {
+  width: 280px; /* Ancho fijo para el sidebar */
+  background-color: #e3f2fd; /* Azul muy claro de fondo (similar al ejemplo) */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  overflow-y: auto; /* Permite desplazamiento si el contenido es largo */
+  flex-shrink: 0; /* No permite que se encoja */
+}
+
+.sidebar h3 {
+  color: #1976d2; /* Azul más fuerte para el título */
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  border-bottom: 2px solid #bbdefb; /* Azul más claro para la línea */
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 5px;
+}
+
+.theme-item, .subtheme-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones para hover */
+  font-weight: 500;
+  color: #333;
+  text-align: left;
+}
+
+.theme-item:hover, .subtheme-item:hover {
+  background-color: #bbdefb; /* Azul claro al pasar el mouse */
+  transform: translateX(5px); /* Pequeño desplazamiento para efecto hover */
+}
+
+.sidebar li.active > .theme-item,
+.sidebar li.active > .subtheme-item {
+  background-color: #1976d2; /* Azul fuerte resaltado para el tema activo */
+  color: white;
+  font-weight: bold;
+  box-shadow: inset 3px 0 0 #64b5f6; /* Línea lateral azul más clara para indicar activo */
+}
+
+.subthemes-list {
+  list-style: none;
+  padding-left: 20px; /* Indentación para subtemas */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-left: 2px solid #90caf9; /* Azul aún más claro para la línea de subtemas */
+}
+
+.subthemes-list .subtheme-item {
+  font-size: 0.9em;
+  padding: 8px 10px;
+  background-color: #e3f2fd; /* Fondo azul muy claro para subtemas */
+}
+
+.subthemes-list li.active > .subtheme-item {
+    background-color: #1e88e5; /* Azul un poco más fuerte para subtema activo */
+    color: white;
+}
+
+.expand-icon {
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+

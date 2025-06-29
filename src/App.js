@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import UnitPage from './components/UnitPage';
+import './App.css'; // CSS específico de la aplicación principal
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* Ruta dinámica para las unidades */}
+          <Route path="/modulo/:unitId" element={<UnitPage />} />
+          {/* Redirección por defecto a la unidad 1 si no se especifica */}
+          <Route path="/" element={<Navigate to="/modulo/1" replace />} />
+          {/* Puedes añadir una ruta 404 si lo deseas */}
+          <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
