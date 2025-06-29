@@ -1,79 +1,96 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getUnitData, findThemeById, flattenThemes } from '../data/contentData';
-import Header from './Header'; // Importa el nuevo Header
+import { useParams } from 'react-router-dom';          // ← se eliminó useNavigate
+import {
+  getUnitData,
+  findThemeById,
+  flattenThemes,
+} from '../data/contentData';
+
+import Header from './Header';
 import Sidebar from './Sidebar';
 import ContentArea from './ContentArea';
-import './UnitPage.css'; // CSS para el layout de la página de unidad
+import './UnitPage.css';
 
 function UnitPage() {
   const { unitId } = useParams();
-  const navigate = useNavigate();
   const [unit, setUnit] = useState(null);
   const [currentThemeId, setCurrentThemeId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [transitionClass, setTransitionClass] = useState('');
-  const [expandedThemes, setExpandedThemes] = useState({}); // State for expanded themes
+  const [expandedThemes, setExpandedThemes] = useState({});
 
+  /* ------------------------------------------------------------------
+     1) Carga de la unidad y selección del tema inicial
+  ------------------------------------------------------------------ */
   useEffect(() => {
     setLoading(true);
     setError(null);
+
     const data = getUnitData(unitId);
-    if (data) {
-      setUnit(data);
-      let initialThemeId = null;
-      
-      // Si no hay un tema seleccionado o el ID no es válido para esta unidad
-      if (!currentThemeId || !findThemeById(data.themes, currentThemeId)) {
-        // Por defecto, selecciona el tema 'info' si existe, si no, el primer tema
-        if (findThemeById(data.themes, `${unitId}.info`)) {
-            initialThemeId = `${unitId}.info`;
-        } else if (data.themes && data.themes.length > 0) {
-          initialThemeId = data.themes[0].id;
-        }
-      } else {
-        initialThemeId = currentThemeId;
-      }
-      setCurrentThemeId(initialThemeId);
-      setLoading(false);
-    } else {
+
+    if (!data) {
       setError('Unit not found');
       setLoading(false);
+      return;
     }
-  }, [unitId]);
 
-  // Effect to manage expanded themes based on currentThemeId
+    setUnit(data);
+
+    /** Determinar el tema inicial (solo si no estaba o no pertenece a
+     *  esta unidad).  Así evitamos re-render infinitos.
+     */
+    const themeStillValid = currentThemeId
+      ? findThemeById(data.themes, currentThemeId)
+      : false;
+
+    let initialThemeId = themeStillValid
+      ? currentThemeId
+      : findThemeById(data.themes, `${unitId}.info`)
+      ? `${unitId}.info`
+      : data.themes[0]?.id;
+
+    if (initialThemeId !== currentThemeId) setCurrentThemeId(initialThemeId);
+
+    setLoading(false);
+  }, [unitId, currentThemeId]);        // ← añadida la dependencia que faltaba
+
+  /* ------------------------------------------------------------------
+     2) Sincronizar árbol expandido en función del tema activo
+  ------------------------------------------------------------------ */
   useEffect(() => {
-    if (unit && currentThemeId) {
-      // Create a copy of current expanded themes to modify
-      const newExpandedThemesState = { ...expandedThemes }; 
-      
-      const findParentAndExpand = (themes, targetId) => {
+    if (!unit || !currentThemeId) return;
+
+    setExpandedThemes((prev) => {
+      // Copia del estado para modificarla
+      const newState = { ...prev };
+
+      const expandParents = (themes, targetId) => {
         for (const theme of themes) {
           if (theme.id === targetId) {
-            newExpandedThemesState[theme.id] = true; // Ensure the active theme itself is expanded if it's a parent
-            return true; 
+            newState[theme.id] = true;
+            return true;
           }
-          if (theme.subthemes && theme.subthemes.length > 0) {
-            if (findParentAndExpand(theme.subthemes, targetId)) {
-              newExpandedThemesState[theme.id] = true; // Expand parent if subtheme is active
-              return true;
-            }
+          if (theme.subthemes?.length && expandParents(theme.subthemes, targetId)) {
+            newState[theme.id] = true;
+            return true;
           }
         }
         return false;
       };
-      
-      findParentAndExpand(unit.themes, currentThemeId);
-      setExpandedThemes(newExpandedThemesState); // Update the state with merged expansions
-    }
-  }, [currentThemeId, unit]); // Depend on currentThemeId and unit data
 
+      expandParents(unit.themes, currentThemeId);
+      return newState;
+    });
+  }, [currentThemeId, unit]);          // ← ya no falta 'expandedThemes'
+
+  /* ------------------------------------------------------------------
+     3) Navegación entre temas lineales
+  ------------------------------------------------------------------ */
   const allThemesFlat = unit ? flattenThemes(unit.themes) : [];
-  const currentThemeFlatIndex = allThemesFlat.findIndex(t => t.id === currentThemeId);
-  const hasPrev = currentThemeFlatIndex > 0;
-  const hasNext = currentThemeFlatIndex < allThemesFlat.length - 1;
+  const currentIndex   = allThemesFlat.findIndex((t) => t.id === currentThemeId);
+  const hasPrev        = currentIndex > 0;
+  const hasNext        = currentIndex < allThemesFlat.length - 1;
 
   const handleThemeChange = (themeId) => {
     setTransitionClass('fade-out');
@@ -86,50 +103,40 @@ function UnitPage() {
   const handleNavigateTheme = (direction) => {
     setTransitionClass('fade-out');
     setTimeout(() => {
-      const currentIndex = allThemesFlat.findIndex(t => t.id === currentThemeId);
-      let nextIndex = currentIndex;
+      const nextIndex =
+        direction === 'next'
+          ? Math.min(allThemesFlat.length - 1, currentIndex + 1)
+          : Math.max(0, currentIndex - 1);
 
-      if (direction === 'next') {
-        nextIndex = Math.min(allThemesFlat.length - 1, currentIndex + 1);
-      } else if (direction === 'prev') {
-        nextIndex = Math.max(0, currentIndex - 1);
-      }
-      
-      if (allThemesFlat[nextIndex]) {
-        setCurrentThemeId(allThemesFlat[nextIndex].id);
-      }
+      setCurrentThemeId(allThemesFlat[nextIndex].id);
       setTransitionClass('');
     }, 300);
   };
 
-  if (loading) {
-    return <div className="loading-message">Cargando unidad...</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
-
-  if (!unit) {
-    return <div className="no-unit-message">Selecciona una unidad para empezar.</div>;
-  }
+  /* ------------------------------------------------------------------
+     Render
+  ------------------------------------------------------------------ */
+  if (loading) return <div className="loading-message">Cargando unidad...</div>;
+  if (error)   return <div className="error-message">{error}</div>;
+  if (!unit)   return <div className="no-unit-message">Selecciona una unidad para empezar.</div>;
 
   const currentTheme = findThemeById(unit.themes, currentThemeId);
 
   return (
     <div className="unit-page-container">
-      <Header /> {/* Usando el nuevo componente Header */}
+      <Header />
 
       <div className="main-content-layout">
         <Sidebar
           themes={unit.themes}
           currentThemeId={currentThemeId}
           onThemeSelect={handleThemeChange}
-          expandedThemes={expandedThemes} // Pass expandedThemes
-          setExpandedThemes={setExpandedThemes} // Pass setExpandedThemes for toggling
+          expandedThemes={expandedThemes}
+          setExpandedThemes={setExpandedThemes}
         />
+
         <ContentArea
-          unit={unit} // Pasa el objeto 'unit' completo
+          unit={unit}
           theme={currentTheme}
           onNavigateTheme={handleNavigateTheme}
           hasPrev={hasPrev}
