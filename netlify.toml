@@ -1,0 +1,6 @@
+# netlify.toml — configuración mínima para aplicaciones React (SPA)
+
+[[redirects]]
+  from = "/*"        # captura cualquier URL
+  to   = "/index.html"
+  status = 200       # indica re-escritura (no redirección visible)
