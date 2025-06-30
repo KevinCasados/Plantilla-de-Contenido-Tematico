@@ -1,22 +1,45 @@
-import React from 'react';
+// src/App.js
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import UnitPage from './components/UnitPage';
-import './App.css'; // CSS específico de la aplicación principal
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './styles/theme';
+import { GlobalStyle } from './styles/GlobalStyle';
+
+import Header from './components/Header/Header';
+import UnitPage from './components/UnitPage/UnitPage';
 
 function App() {
+  /* ---------- estado del tema centralizado ---------- */
+  const [themeName, setThemeName] = useState('light');
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored) setThemeName(stored);
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setThemeName(prev => {
+      const next = prev === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      return next;
+    });
+  }, []);
+
   return (
-    <Router>
-      <div className="App">
+    <ThemeProvider theme={themeName === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyle />
+
+      {/* Paso al Header la función y el nombre del tema */}
+      <Header themeName={themeName} toggleTheme={toggleTheme} />
+
+      <Router>
         <Routes>
-          {/* Ruta dinámica para las unidades */}
           <Route path="/modulo/:unitId" element={<UnitPage />} />
-          {/* Redirección por defecto a la unidad 1 si no se especifica */}
           <Route path="/" element={<Navigate to="/modulo/1" replace />} />
-          {/* Puedes añadir una ruta 404 si lo deseas */}
-          <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
+          <Route path="*" element={<h2>404 – Página no encontrada</h2>} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 

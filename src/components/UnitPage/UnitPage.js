@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';          // ← se eliminó useNavigate
+import { useParams } from 'react-router-dom';
+
 import {
   getUnitData,
   findThemeById,
   flattenThemes,
-} from '../data/contentData';
+} from '../../data/contentData';
 
-import Header from './Header';
-import Sidebar from './Sidebar';
-import ContentArea from './ContentArea';
-import './UnitPage.css';
+import Sidebar from '../Sidebar/Sidebar';
+import ContentArea from '../ContentArea/ContentArea';
+
+import {
+  UnitPageContainer,
+  MainContentLayout,
+  LoadingMessage,
+  ErrorMessage,
+  EmptyMessage,
+} from './UnitPage.styles';
 
 function UnitPage() {
   const { unitId } = useParams();
-  const [unit, setUnit] = useState(null);
+
+  const [unit, setUnit]                 = useState(null);
   const [currentThemeId, setCurrentThemeId] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading]           = useState(true);
+  const [error, setError]               = useState(null);
   const [transitionClass, setTransitionClass] = useState('');
-  const [expandedThemes, setExpandedThemes] = useState({});
+  const [expandedThemes, setExpandedThemes]   = useState({});
 
   /* ------------------------------------------------------------------
      1) Carga de la unidad y selección del tema inicial
@@ -37,14 +45,11 @@ function UnitPage() {
 
     setUnit(data);
 
-    /** Determinar el tema inicial (solo si no estaba o no pertenece a
-     *  esta unidad).  Así evitamos re-render infinitos.
-     */
     const themeStillValid = currentThemeId
       ? findThemeById(data.themes, currentThemeId)
       : false;
 
-    let initialThemeId = themeStillValid
+    const initialThemeId = themeStillValid
       ? currentThemeId
       : findThemeById(data.themes, `${unitId}.info`)
       ? `${unitId}.info`
@@ -53,7 +58,7 @@ function UnitPage() {
     if (initialThemeId !== currentThemeId) setCurrentThemeId(initialThemeId);
 
     setLoading(false);
-  }, [unitId, currentThemeId]);        // ← añadida la dependencia que faltaba
+  }, [unitId, currentThemeId]);
 
   /* ------------------------------------------------------------------
      2) Sincronizar árbol expandido en función del tema activo
@@ -62,7 +67,6 @@ function UnitPage() {
     if (!unit || !currentThemeId) return;
 
     setExpandedThemes((prev) => {
-      // Copia del estado para modificarla
       const newState = { ...prev };
 
       const expandParents = (themes, targetId) => {
@@ -71,7 +75,10 @@ function UnitPage() {
             newState[theme.id] = true;
             return true;
           }
-          if (theme.subthemes?.length && expandParents(theme.subthemes, targetId)) {
+          if (
+            theme.subthemes?.length &&
+            expandParents(theme.subthemes, targetId)
+          ) {
             newState[theme.id] = true;
             return true;
           }
@@ -82,15 +89,15 @@ function UnitPage() {
       expandParents(unit.themes, currentThemeId);
       return newState;
     });
-  }, [currentThemeId, unit]);          // ← ya no falta 'expandedThemes'
+  }, [currentThemeId, unit]);
 
   /* ------------------------------------------------------------------
      3) Navegación entre temas lineales
   ------------------------------------------------------------------ */
   const allThemesFlat = unit ? flattenThemes(unit.themes) : [];
-  const currentIndex   = allThemesFlat.findIndex((t) => t.id === currentThemeId);
-  const hasPrev        = currentIndex > 0;
-  const hasNext        = currentIndex < allThemesFlat.length - 1;
+  const currentIndex  = allThemesFlat.findIndex((t) => t.id === currentThemeId);
+  const hasPrev       = currentIndex > 0;
+  const hasNext       = currentIndex < allThemesFlat.length - 1;
 
   const handleThemeChange = (themeId) => {
     setTransitionClass('fade-out');
@@ -116,17 +123,15 @@ function UnitPage() {
   /* ------------------------------------------------------------------
      Render
   ------------------------------------------------------------------ */
-  if (loading) return <div className="loading-message">Cargando unidad...</div>;
-  if (error)   return <div className="error-message">{error}</div>;
-  if (!unit)   return <div className="no-unit-message">Selecciona una unidad para empezar.</div>;
+  if (loading) return <LoadingMessage>Cargando unidad…</LoadingMessage>;
+  if (error)   return <ErrorMessage>{error}</ErrorMessage>;
+  if (!unit)   return <EmptyMessage>Selecciona una unidad para empezar.</EmptyMessage>;
 
   const currentTheme = findThemeById(unit.themes, currentThemeId);
 
   return (
-    <div className="unit-page-container">
-      <Header />
-
-      <div className="main-content-layout">
+    <UnitPageContainer>
+      <MainContentLayout>
         <Sidebar
           themes={unit.themes}
           currentThemeId={currentThemeId}
@@ -143,8 +148,8 @@ function UnitPage() {
           hasNext={hasNext}
           transitionClass={transitionClass}
         />
-      </div>
-    </div>
+      </MainContentLayout>
+    </UnitPageContainer>
   );
 }
 
