@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   SidebarWrapper,
+  ToggleTab,
+  CloseButton,
   Heading,
   List,
   ThemeItem,
@@ -15,61 +17,67 @@ function Sidebar({
   onThemeSelect,
   expandedThemes,
   setExpandedThemes,
+  collapsed,
+  onToggle,
 }) {
-  const toggleExpand = (themeId) =>
-    setExpandedThemes((prev) => ({ ...prev, [themeId]: !prev[themeId] }));
+  const toggleExpand = (id) =>
+    setExpandedThemes((p) => ({ ...p, [id]: !p[id] }));
 
-  const isActiveTheme = (t) =>
-    t.id === currentThemeId ||
-    t.subthemes?.some((sub) => sub.id === currentThemeId);
+  const isActive = (t) =>
+    t.id === currentThemeId || t.subthemes?.some((s) => s.id === currentThemeId);
 
   return (
-    <SidebarWrapper>
-      <Heading>Contenido de la Unidad</Heading>
-      <nav>
-        <List>
-          {themes.map((theme) => (
-            <li key={theme.id}>
-              <ThemeItem
-                $active={isActiveTheme(theme)}
-                onClick={() => {
-                  if (theme.subthemes?.length) toggleExpand(theme.id);
-                  onThemeSelect(theme.id);
-                }}
-              >
-                {theme.isUnitInfo ? (
-                  <span>{theme.title}</span>
-                ) : (
-                  <span>
-                    {theme.numbering} {theme.title}
-                  </span>
-                )}
+    <SidebarWrapper $collapsed={collapsed}>
+      {/* Pestaña (escritorio) */}
+      <ToggleTab onClick={onToggle}>{collapsed ? '▶' : '◀'}</ToggleTab>
 
-                {theme.subthemes?.length > 0 && (
-                  <ExpandIcon>
-                    {expandedThemes[theme.id] ? '▼' : '►'}
-                  </ExpandIcon>
-                )}
-              </ThemeItem>
+      {/* Botón cierre (móvil) */}
+      <CloseButton onClick={onToggle} aria-label="Cerrar menú">
+        ✕
+      </CloseButton>
 
-              {theme.subthemes?.length > 0 && expandedThemes[theme.id] && (
-                <SubthemesList>
-                  {theme.subthemes.map((sub) => (
-                    <li key={sub.id}>
-                      <SubthemeItem
-                        $active={sub.id === currentThemeId}
-                        onClick={() => onThemeSelect(sub.id)}
-                      >
-                        {sub.numbering} {sub.title}
-                      </SubthemeItem>
-                    </li>
-                  ))}
-                </SubthemesList>
-              )}
-            </li>
-          ))}
-        </List>
-      </nav>
+      <div className="panel">
+        <Heading>Contenido de la Unidad</Heading>
+
+        <nav>
+          <List>
+            {themes.map((t) => (
+              <li key={t.id}>
+                <ThemeItem
+                  $active={isActive(t)}
+                  onClick={() => {
+                    if (t.subthemes?.length) toggleExpand(t.id);
+                    onThemeSelect(t.id);
+                  }}
+                >
+                  {t.isUnitInfo ? (
+                    <span>{t.title}</span>
+                  ) : (
+                    <span>{t.numbering} {t.title}</span>
+                  )}
+
+                  {t.subthemes?.length > 0 &&
+                    <ExpandIcon>{expandedThemes[t.id] ? '▼' : '►'}</ExpandIcon>}
+                </ThemeItem>
+
+                {t.subthemes?.length > 0 && expandedThemes[t.id] &&
+                  <SubthemesList>
+                    {t.subthemes.map((s) => (
+                      <li key={s.id}>
+                        <SubthemeItem
+                          $active={s.id === currentThemeId}
+                          onClick={() => onThemeSelect(s.id)}
+                        >
+                          {s.numbering} {s.title}
+                        </SubthemeItem>
+                      </li>
+                    ))}
+                  </SubthemesList>}
+              </li>
+            ))}
+          </List>
+        </nav>
+      </div>
     </SidebarWrapper>
   );
 }

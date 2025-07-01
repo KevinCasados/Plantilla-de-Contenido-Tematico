@@ -1,39 +1,43 @@
 import styled, { css } from 'styled-components';
 
-/* ---------- layout general ---------- */
+/* —— contenedor global —— */
 export const UnitPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 100px);
-  overflow: hidden;                   /* evita doble scroll */
+  /* descuento 72 px del header para evitar doble scroll */
+  height: calc(100vh - 72px);
+  overflow: hidden;
   background: ${({ theme }) => theme.colors.background};
 `;
 
-/* ---------- zona central (sidebar + contenido) ---------- */
+/* —— layout central —— */
 export const MainContentLayout = styled.div`
   display: flex;
   flex: 1;
   overflow: hidden;
 `;
 
-/* ---------- mensajes (carga, error, sin unidad) ---------- */
-const baseMessage = css`
+/* —— mensajes —— */
+const base = css`
   padding: 20px;
   text-align: center;
   font-size: 1.1em;
 `;
-
 export const LoadingMessage = styled.div`
-  ${baseMessage};
-  color: ${({ theme }) => theme.colors.mutedText};
+  ${base}; color: ${({ theme }) => theme.colors.mutedText};
 `;
-
 export const ErrorMessage = styled.div`
-  ${baseMessage};
-  color: ${({ theme }) => theme.colors.danger};
+  ${base}; color: ${({ theme }) => theme.colors.danger};
+`;
+export const EmptyMessage = styled.div`
+  ${base}; color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-export const EmptyMessage = styled.div`
-  ${baseMessage};
-  color: ${({ theme }) => theme.colors.textSecondary};
+/* —— overlay (móvil) —— */
+export const Overlay = styled.div`
+  display: ${({ $show }) => ($show ? 'block' : 'none')};
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 900;
 `;
