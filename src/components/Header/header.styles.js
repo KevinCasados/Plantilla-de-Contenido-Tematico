@@ -1,43 +1,94 @@
 import styled from 'styled-components';
 
-/* ---------- contenedor principal del header ---------- */
+/* —— CONTENEDOR PRINCIPAL —— */
 export const HeaderWrapper = styled.header`
+  position: relative;                       /* para centrar el logo en móviles */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
-  height: 100px;
+  height: 72px;
+  padding: 0 1rem;
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.headerText || '#ffffff'};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-/* ---------- switch wrapper (cápsula) ---------- */
+/* —— HAMBURGUESA —— */
+export const BurgerButton = styled.button`
+  display: none;                            /* oculta por defecto */
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: background 0.25s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  /* solo en < 1080 px */
+  @media (max-width: 1079px) {
+    display: flex;
+  }
+`;
+
+/* —— BLOQUE “LOGO + TEXTO” —— (solo escritorio) */
+export const BrandBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.35rem;
+  font-weight: 600;
+
+  @media (max-width: 1079px) {
+    display: none;                          /* se oculta en móviles */
+  }
+`;
+
+export const LogoImg = styled.img`
+  height: 48px;
+`;
+
+/* —— LOGO CENTRADO EN MÓVIL —— */
+export const MobileLogo = styled.img`
+  display: none;
+
+  @media (max-width: 1079px) {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 48px;
+  }
+`;
+
+/* —— SWITCH —— */
 export const SwitchWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 3px;                /* borde interior para ver contraste */
+  padding: 3px 5px 3px 3px;
   border-radius: 999px;
-  background: ${({ theme }) => theme.colors.toggleWrapperBg || 'rgba(255,255,255,0.25)'};
+  background: ${({ theme }) =>
+    theme.colors.toggleWrapperBg || 'rgba(255,255,255,0.25)'};
 `;
 
-/* ---------- pista del switch ---------- */
 export const Track = styled.div`
   position: relative;
   width: 64px;
   height: 32px;
   border-radius: 999px;
-  background: ${({ theme }) => theme.colors.toggleTrack};
+  background: ${({ $isDark, theme }) =>
+    $isDark ? theme.colors.toggleTrackActive : theme.colors.toggleTrack};
   cursor: pointer;
   transition: background 0.25s ease;
-
-  ${({ $isDark, theme }) =>
-    $isDark &&
-    `background: ${theme.colors.toggleTrackActive};`}
 `;
 
-/* ---------- perilla ---------- */
 export const Thumb = styled.div`
   position: absolute;
   top: 3px;
@@ -49,16 +100,14 @@ export const Thumb = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: ${({ $isDark }) =>
+    $isDark ? 'translateX(32px)' : 'translateX(0)'};
   transition: transform 0.25s ease;
-  transform: ${({ $isDark }) => ($isDark ? 'translateX(32px)' : 'translateX(0)')};
 
   & svg {
     width: 16px;
     height: 16px;
-    /* Colores de ícono con fallback */
-    fill: ${({ $isDark, theme }) =>
-      $isDark
-        ? theme.colors.iconMoon || '#f5d742'
-        : theme.colors.iconSun || '#ffcc33'};
+    color: ${({ $isDark, theme }) =>
+      $isDark ? theme.colors.iconMoon : theme.colors.iconSun};
   }
 `;

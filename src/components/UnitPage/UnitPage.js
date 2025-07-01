@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import {
   getUnitData,
   findThemeById,
   flattenThemes,
 } from '../../data/contentData';
 
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar     from '../Sidebar/Sidebar';
 import ContentArea from '../ContentArea/ContentArea';
 
 import {
@@ -16,11 +15,48 @@ import {
   LoadingMessage,
   ErrorMessage,
   EmptyMessage,
+  Overlay,
 } from './UnitPage.styles';
 
-function UnitPage() {
-  const { unitId } = useParams();
+/* ——— hook para media-query ——— */
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(
+    () => window.matchMedia(query).matches
+  );
+  useEffect(() => {
+    const m = window.matchMedia(query);
+    const handler = () => setMatches(m.matches);
+    m.addEventListener('change', handler);
+    return () => m.removeEventListener('change', handler);
+  }, [query]);
+  return matches;
+}
 
+function UnitPage() {
+  const { unitId }   = useParams();
+  const isMobile     = useMediaQuery('(max-width: 1079px)');
+
+  /* —— sidebar —— */
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(isMobile);
+  const toggleSidebar = () => setSidebarCollapsed((p) => !p);
+
+  /* escuchar evento del Header */
+  useEffect(() => {
+    window.addEventListener('burger-toggle', toggleSidebar);
+    return () => window.removeEventListener('burger-toggle', toggleSidebar);
+  }, []);                                           // sólo una vez
+
+  /* bloquear / restaurar scroll body en móvil */
+  useEffect(() => {
+    if (!isMobile) return;
+    document.body.style.overflow = sidebarCollapsed ? 'auto' : 'hidden';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [sidebarCollapsed, isMobile]);
+
+  /* cerrar automáticamente si pasa a escritorio */
+  useEffect(() => { setSidebarCollapsed(isMobile); }, [isMobile]);
+
+  /* ——— datos de la unidad (igual que antes) ——— */
   const [unit, setUnit]                 = useState(null);
   const [currentThemeId, setCurrentThemeId] = useState(null);
   const [loading, setLoading]           = useState(true);
@@ -28,101 +64,71 @@ function UnitPage() {
   const [transitionClass, setTransitionClass] = useState('');
   const [expandedThemes, setExpandedThemes]   = useState({});
 
-  /* ------------------------------------------------------------------
-     1) Carga de la unidad y selección del tema inicial
-  ------------------------------------------------------------------ */
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-
+    setLoading(true); setError(null);
     const data = getUnitData(unitId);
-
-    if (!data) {
-      setError('Unit not found');
-      setLoading(false);
-      return;
-    }
-
+    if (!data) { setError('Unit not found'); setLoading(false); return; }
     setUnit(data);
 
-    const themeStillValid = currentThemeId
-      ? findThemeById(data.themes, currentThemeId)
-      : false;
-
-    const initialThemeId = themeStillValid
+    const valid   = currentThemeId &&
+                    findThemeById(data.themes, currentThemeId);
+    const initial = valid
       ? currentThemeId
       : findThemeById(data.themes, `${unitId}.info`)
       ? `${unitId}.info`
       : data.themes[0]?.id;
 
-    if (initialThemeId !== currentThemeId) setCurrentThemeId(initialThemeId);
-
+    setCurrentThemeId(initial);
     setLoading(false);
-  }, [unitId, currentThemeId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unitId]);
 
-  /* ------------------------------------------------------------------
-     2) Sincronizar árbol expandido en función del tema activo
-  ------------------------------------------------------------------ */
+  /* abrir padres del tema activo */
   useEffect(() => {
     if (!unit || !currentThemeId) return;
-
     setExpandedThemes((prev) => {
-      const newState = { ...prev };
-
-      const expandParents = (themes, targetId) => {
-        for (const theme of themes) {
-          if (theme.id === targetId) {
-            newState[theme.id] = true;
-            return true;
-          }
-          if (
-            theme.subthemes?.length &&
-            expandParents(theme.subthemes, targetId)
-          ) {
-            newState[theme.id] = true;
-            return true;
+      const next = { ...prev };
+      const open = (list, id) => {
+        for (const t of list) {
+          if (t.id === id) { next[t.id] = true; return true; }
+          if (t.subthemes?.length && open(t.subthemes, id)) {
+            next[t.id] = true; return true;
           }
         }
         return false;
       };
-
-      expandParents(unit.themes, currentThemeId);
-      return newState;
+      open(unit.themes, currentThemeId);
+      return next;
     });
-  }, [currentThemeId, unit]);
+  }, [unit, currentThemeId]);
 
-  /* ------------------------------------------------------------------
-     3) Navegación entre temas lineales
-  ------------------------------------------------------------------ */
-  const allThemesFlat = unit ? flattenThemes(unit.themes) : [];
-  const currentIndex  = allThemesFlat.findIndex((t) => t.id === currentThemeId);
-  const hasPrev       = currentIndex > 0;
-  const hasNext       = currentIndex < allThemesFlat.length - 1;
+  /* navegación lineal */
+  const flat     = unit ? flattenThemes(unit.themes) : [];
+  const idx      = flat.findIndex((t) => t.id === currentThemeId);
+  const hasPrev  = idx > 0;
+  const hasNext  = idx < flat.length - 1;
 
-  const handleThemeChange = (themeId) => {
+  const changeTheme = (id) => {
     setTransitionClass('fade-out');
     setTimeout(() => {
-      setCurrentThemeId(themeId);
+      setCurrentThemeId(id);
+      setTransitionClass('');
+      if (isMobile) setSidebarCollapsed(true); // cerrar en móvil
+    }, 300);
+  };
+
+  const navigate = (dir) => {
+    setTransitionClass('fade-out');
+    setTimeout(() => {
+      const next =
+        dir === 'next' ? Math.min(flat.length - 1, idx + 1)
+                       : Math.max(0, idx - 1);
+      setCurrentThemeId(flat[next].id);
       setTransitionClass('');
     }, 300);
   };
 
-  const handleNavigateTheme = (direction) => {
-    setTransitionClass('fade-out');
-    setTimeout(() => {
-      const nextIndex =
-        direction === 'next'
-          ? Math.min(allThemesFlat.length - 1, currentIndex + 1)
-          : Math.max(0, currentIndex - 1);
-
-      setCurrentThemeId(allThemesFlat[nextIndex].id);
-      setTransitionClass('');
-    }, 300);
-  };
-
-  /* ------------------------------------------------------------------
-     Render
-  ------------------------------------------------------------------ */
+  /* ——— render ——— */
   if (loading) return <LoadingMessage>Cargando unidad…</LoadingMessage>;
   if (error)   return <ErrorMessage>{error}</ErrorMessage>;
   if (!unit)   return <EmptyMessage>Selecciona una unidad para empezar.</EmptyMessage>;
@@ -131,19 +137,24 @@ function UnitPage() {
 
   return (
     <UnitPageContainer>
+      {/* overlay semi-transparente en móvil */}
+      <Overlay $show={!sidebarCollapsed && isMobile} onClick={toggleSidebar} />
+
       <MainContentLayout>
         <Sidebar
           themes={unit.themes}
           currentThemeId={currentThemeId}
-          onThemeSelect={handleThemeChange}
+          onThemeSelect={changeTheme}
           expandedThemes={expandedThemes}
           setExpandedThemes={setExpandedThemes}
+          collapsed={sidebarCollapsed}
+          onToggle={toggleSidebar}
         />
 
         <ContentArea
           unit={unit}
           theme={currentTheme}
-          onNavigateTheme={handleNavigateTheme}
+          onNavigateTheme={navigate}
           hasPrev={hasPrev}
           hasNext={hasNext}
           transitionClass={transitionClass}
