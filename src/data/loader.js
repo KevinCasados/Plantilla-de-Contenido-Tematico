@@ -1,10 +1,11 @@
-/*  src/data/contentData.js
-    Provee utilidades para UnitPage.                     */
+/*  src/data/loader.js
+    Carga los módulos y ofrece utilidades usadas en UnitPage.            */
 
-import * as modules from './index';          // <- dentro de /data, no "../index"
+import { programs } from './index';
 
 /* ——— 1 · obtener objeto del módulo ——— */
-export const getUnitData = (moduleId) => modules[moduleId];
+export const getUnitData = (programId, courseId, moduleId) =>
+  programs?.[programId]?.[courseId]?.[moduleId];
 
 /* ——— 2 · encontrar un tema recursivamente ——— */
 export const findThemeById = (themes, id) => {
