@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import {
+  /* bloques base */
   ContentWrapper,
   ThemeTitle,
   Paragraph,
-  Image,
+
+  /*  bloques multimedia  */
+  Figure,
+  BlockQuote,
+  Ordered,
+  Unordered,
   LinkBox,
   VideoBox,
+
+  /* acordeón y navegación */
   Accordion,
   AccordionHeader,
   AccordionContent,
   NavButtons,
   NavButton,
+
+  /* cuadro información de la unidad */
   UnitInfoBox,
 } from './ContentArea.styles';
 
@@ -23,7 +33,6 @@ function ContentArea({
   transitionClass,
 }) {
   const [accordionOpen, setAccordionOpen] = useState({});
-
   const toggleAccordion = (i) =>
     setAccordionOpen((p) => ({ ...p, [i]: !p[i] }));
 
@@ -35,7 +44,7 @@ function ContentArea({
       </ContentWrapper>
     );
 
-  /* ——— información de la unidad ——— */
+  /* ——— Información general del módulo ——— */
   if (theme.isUnitInfo) {
     return (
       <ContentWrapper className={transitionClass}>
@@ -79,7 +88,7 @@ function ContentArea({
     );
   }
 
-  /* ——— contenido estándar del tema ——— */
+  /* ——— CONTENIDO DEL TEMA ——— */
   return (
     <ContentWrapper className={transitionClass}>
       <div className="inner">
@@ -91,8 +100,47 @@ function ContentArea({
           switch (block.type) {
             case 'paragraph':
               return <Paragraph key={idx}>{block.text}</Paragraph>;
+
             case 'image':
-              return <Image key={idx} src={block.src} alt={block.alt || ''} />;
+              return (
+                <Figure key={idx}>
+                  <img src={block.src} alt={block.alt || ''} />
+                  {block.caption && <figcaption>{block.caption}</figcaption>}
+                </Figure>
+              );
+
+            case 'video':
+              return (
+                <VideoBox key={idx}>
+                  {block.title && <h3>{block.title}</h3>}
+                  <iframe
+                    src={block.src.replace('watch?v=', 'embed/')}
+                    title={block.title || 'video'}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  {block.caption && <p>{block.caption}</p>}
+                </VideoBox>
+              );
+
+            case 'blockquote':
+              return <BlockQuote key={idx}>{block.text}</BlockQuote>;
+
+            case 'list':
+              return block.style === 'ordered' ? (
+                <Ordered key={idx}>
+                  {block.items.map((it, i) => (
+                    <li key={i}>{it}</li>
+                  ))}
+                </Ordered>
+              ) : (
+                <Unordered key={idx}>
+                  {block.items.map((it, i) => (
+                    <li key={i}>{it}</li>
+                  ))}
+                </Unordered>
+              );
+
             case 'link':
               return (
                 <LinkBox key={idx}>
@@ -101,18 +149,7 @@ function ContentArea({
                   </a>
                 </LinkBox>
               );
-            case 'video':
-              return (
-                <VideoBox key={idx}>
-                  {block.title && <h3>{block.title}</h3>}
-                  <iframe
-                    src={block.url.replace('watch?v=', 'embed/')}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title={block.title}
-                  />
-                </VideoBox>
-              );
+
             case 'accordion':
               return (
                 <Accordion key={idx}>
@@ -125,6 +162,7 @@ function ContentArea({
                   )}
                 </Accordion>
               );
+
             default:
               return null;
           }

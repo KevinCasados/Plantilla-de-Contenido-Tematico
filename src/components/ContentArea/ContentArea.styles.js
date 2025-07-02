@@ -7,7 +7,7 @@ const card = css`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 `;
 
-/* ——— wrapper principal —— ahora centra el contenido y fija un ancho máx. ——— */
+/* ——— wrapper principal ——— */
 export const ContentWrapper = styled.main`
   flex: 1;
   overflow-y: auto;
@@ -15,23 +15,20 @@ export const ContentWrapper = styled.main`
   line-height: 1.7;
   transition: background 0.3s ease;
 
-  /* 1) centrado horizontal */
   display: flex;
   justify-content: center;
 
-  /* 2) bloque interno que recibe padding y ancho máximo */
   & > .inner {
     width: 100%;
-    max-width: 1500px;       /* ← ajusta este valor a tu gusto */
+    max-width: 1500px;
     padding: 30px;
     padding-top: 90px;
   }
 
-  /* estado “sin contenido” (cargando…) */
   ${({ $noContent }) =>
     $noContent &&
     css`
-      align-items: center; /* centrado vertical */
+      align-items: center;
       .inner {
         display: flex;
         justify-content: center;
@@ -41,7 +38,7 @@ export const ContentWrapper = styled.main`
     `}
 `;
 
-/* ——— tipografía y bloques reutilizables ——— */
+/* ——— bloques reutilizables ——— */
 export const ThemeTitle = styled.h2`
   font-size: 2rem;
   margin-bottom: 25px;
@@ -64,13 +61,48 @@ export const Image = styled.img`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
+/* ======= nuevos estilos para multimedia ======= */
+export const Figure = styled.figure`
+  margin: 2rem 0;
+  text-align: center;
+  > img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  > figcaption {
+    margin-top: .5rem;
+    font-size: .9em;
+    color: ${({ theme }) => theme.colors.mutedText};
+  }
+`;
+
+export const BlockQuote = styled.blockquote`
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.colors.primaryExtraSoft};
+  font-style: italic;
+`;
+
+export const Unordered = styled.ul`
+  margin: 1rem 0 1rem 1.2rem;
+  list-style: disc;
+  li { margin: .4rem 0; }
+`;
+export const Ordered = styled.ol`
+  margin: 1rem 0 1rem 1.2rem;
+  list-style: decimal;
+  li { margin: .4rem 0; }
+`;
+
+/* ——— enlaces y video ——— */
 export const LinkBox = styled.div`
   margin: 15px 0;
   a {
     color: ${({ theme }) => theme.colors.link};
     font-weight: bold;
     text-decoration: none;
-    transition: color 0.3s;
     &:hover {
       color: ${({ theme }) => theme.colors.linkHover};
       text-decoration: underline;
@@ -107,9 +139,7 @@ export const AccordionHeader = styled.button`
   justify-content: space-between;
   cursor: pointer;
   transition: background 0.25s;
-  &:hover {
-    background: ${({ theme }) => theme.colors.primarySoft};
-  }
+  &:hover { background: ${({ theme }) => theme.colors.primarySoft}; }
 `;
 export const AccordionContent = styled.div`
   padding: 15px 20px;
@@ -118,7 +148,7 @@ export const AccordionContent = styled.div`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-/* ——— botones navegación ——— */
+/* ——— navegación ——— */
 export const NavButtons = styled.div`
   display: flex;
   justify-content: space-between;
@@ -144,48 +174,17 @@ export const NavButton = styled.button`
   }
 `;
 
-/* ——— bloque de información de unidad ——— */
+/* ——— cuadro info unidad ——— */
 export const UnitInfoBox = styled.section`
   ${card};
   background: ${({ theme }) => theme.colors.successLight};
   margin-bottom: 25px;
   padding: 25px;
-
-  .unit-title {
-    text-align: center;
-    font-size: 2.2em;
-    margin-bottom: 10px;
-    color: ${({ theme }) => theme.colors.primary};
-  }
-  .unit-subtitle {
-    text-align: center;
-    font-size: 1.6em;
-    margin-bottom: 25px;
-    color: ${({ theme }) => theme.colors.success};
-  }
-  .unit-meta {
-    font-size: 1.05em;
-    margin-bottom: 8px;
-  }
-  .section-heading {
-    font-size: 1.35em;
-    margin: 25px 0 12px;
-    color: ${({ theme }) => theme.colors.success};
-  }
-  .objective {
-    ${card};
-    border-left: 5px solid ${({ theme }) => theme.colors.success};
-    margin-bottom: 20px;
-    padding: 15px;
-  }
-  .competencies {
-    list-style: none;
-    padding: 0;
-    li {
-      ${card};
-      border-left: 4px solid ${({ theme }) => theme.colors.successSoft};
-      margin-bottom: 10px;
-      padding: 12px;
-    }
-  }
+  .unit-title   { text-align:center;font-size:2.2em;margin:10px 0;color:${({theme})=>theme.colors.primary}; }
+  .unit-subtitle{ text-align:center;font-size:1.6em;margin-bottom:25px;color:${({theme})=>theme.colors.success}; }
+  .unit-meta    { font-size:1.05em;margin-bottom:8px; }
+  .section-heading{ font-size:1.35em;margin:25px 0 12px;color:${({theme})=>theme.colors.success}; }
+  .objective{ ${card};border-left:5px solid ${({ theme }) => theme.colors.success};margin-bottom:20px;padding:15px; }
+  .competencies{ list-style:none;padding:0;
+    li{ ${card};border-left:4px solid ${({ theme }) => theme.colors.successSoft};margin-bottom:10px;padding:12px; } }
 `;
