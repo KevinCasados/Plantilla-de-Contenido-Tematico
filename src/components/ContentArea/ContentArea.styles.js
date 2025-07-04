@@ -18,6 +18,33 @@ export const ContentWrapper = styled.main`
   display: flex;
   justify-content: center;
 
+  /* ───── Barra reservada (6 px) ───── */
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-scrollbar {
+    width: 6px;                 /* ancho fijo → no hay “brinco”          */
+    background: transparent;    /* pista invisible                       */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: transparent;    /* pulgar también transparente           */
+    border-radius: 3px;
+  }
+
+  /* Firefox */
+  scrollbar-width: thin;                       /* ~6 px */
+  scrollbar-color: transparent transparent;    /* pista + pulgar invisibles */
+
+  /* ───── Al pasar el puntero: solo se colorea el pulgar ───── */
+  &:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);           /* color sutil               */
+  }
+  &:hover::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.06);           /* pista tenue (opcional)    */
+  }
+  &:hover {
+    scrollbar-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.06); /* Firefox    */
+  }
+
+  /* ───── Contenedor interno ───── */
   & > .inner {
     width: 100%;
     max-width: 1500px;
@@ -155,6 +182,7 @@ export const NavButtons = styled.div`
   margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid ${({ theme }) => theme.colors.divider};
+  padding-bottom: 90px;
 `;
 export const NavButton = styled.button`
   background: ${({ $next, theme }) =>

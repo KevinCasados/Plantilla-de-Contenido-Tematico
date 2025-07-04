@@ -11,6 +11,7 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 
 import Header from "./components/Header/Header";
 import UnitPage from "./components/UnitPage/UnitPage";
+import Footer from "./components/Footer/footer";
 
 function App() {
   const [themeName, setThemeName] = useState("light");
@@ -52,6 +53,7 @@ function App() {
           <Route path="*" element={<h2>404 – Página no encontrada</h2>} />
         </Routes>
       </Router>
+       <Footer />
     </ThemeProvider>
   );
 }

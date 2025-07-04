@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { marked } from 'marked';
 import {
   /* bloques base */
   ContentWrapper,
   ThemeTitle,
   Paragraph,
 
-  /*  bloques multimedia  */
+  /* multimedia y listas */
   Figure,
   BlockQuote,
   Ordered,
@@ -32,11 +33,20 @@ function ContentArea({
   hasNext,
   transitionClass,
 }) {
+  /* ---------- ESTADO DEL ACORDEÓN ---------- */
   const [accordionOpen, setAccordionOpen] = useState({});
-  const toggleAccordion = (i) =>
-    setAccordionOpen((p) => ({ ...p, [i]: !p[i] }));
 
-  /* ——— estados de carga ——— */
+  /*  abre de forma predeterminada los bloques con { open:true }  */
+  useEffect(() => {
+    if (!theme) return;
+    const init = {};
+    theme.content.forEach((b, i) => {
+      if (b.type === 'accordion' && b.open) init[i] = true;
+    });
+    setAccordionOpen(init);
+  }, [theme]);
+
+  /* ---------- CARGANDO / SIN CONTENIDO ---------- */
   if (!theme || !unit)
     return (
       <ContentWrapper $noContent className={transitionClass}>
@@ -44,7 +54,7 @@ function ContentArea({
       </ContentWrapper>
     );
 
-  /* ——— Información general del módulo ——— */
+  /* ---------- INFORMACIÓN GENERAL DEL MÓDULO ---------- */
   if (theme.isUnitInfo) {
     return (
       <ContentWrapper className={transitionClass}>
@@ -88,19 +98,34 @@ function ContentArea({
     );
   }
 
-  /* ——— CONTENIDO DEL TEMA ——— */
+  /* ---------- CONTENIDO DEL TEMA ---------- */
+
+  /* ⚠️ CAMBIO – evita repetir texto si numbering === title */
+  const displayTitle =
+    theme.numbering &&
+    theme.numbering.trim() !== '' &&
+    theme.numbering.trim() !== theme.title.trim()
+      ? `${theme.numbering} ${theme.title}`
+      : theme.title;
+
   return (
     <ContentWrapper className={transitionClass}>
       <div className="inner">
-        <ThemeTitle>
-          {theme.numbering} {theme.title}
-        </ThemeTitle>
+        {/* Título sin duplicaciones */}
+        <ThemeTitle>{displayTitle}</ThemeTitle>
 
         {theme.content.map((block, idx) => {
           switch (block.type) {
+            /* ----- texto en Markdown ----- */
             case 'paragraph':
-              return <Paragraph key={idx}>{block.text}</Paragraph>;
+              return (
+                <Paragraph
+                  key={idx}
+                  dangerouslySetInnerHTML={{ __html: marked.parse(block.text) }}
+                />
+              );
 
+            /* ----- imagen ----- */
             case 'image':
               return (
                 <Figure key={idx}>
@@ -109,6 +134,7 @@ function ContentArea({
                 </Figure>
               );
 
+            /* ----- video ----- */
             case 'video':
               return (
                 <VideoBox key={idx}>
@@ -123,24 +149,27 @@ function ContentArea({
                 </VideoBox>
               );
 
+            /* ----- cita ----- */
             case 'blockquote':
               return <BlockQuote key={idx}>{block.text}</BlockQuote>;
 
+            /* ----- lista ----- */
             case 'list':
-              return block.style === 'ordered' ? (
-                <Ordered key={idx}>
+              const ListTag = block.style === 'ordered' ? Ordered : Unordered;
+              return (
+                <ListTag key={idx}>
                   {block.items.map((it, i) => (
-                    <li key={i}>{it}</li>
+                    <li
+                      key={i}
+                      dangerouslySetInnerHTML={{
+                        __html: marked.parseInline(it),
+                      }}
+                    />
                   ))}
-                </Ordered>
-              ) : (
-                <Unordered key={idx}>
-                  {block.items.map((it, i) => (
-                    <li key={i}>{it}</li>
-                  ))}
-                </Unordered>
+                </ListTag>
               );
 
+            /* ----- enlace simple ----- */
             case 'link':
               return (
                 <LinkBox key={idx}>
@@ -150,24 +179,37 @@ function ContentArea({
                 </LinkBox>
               );
 
-            case 'accordion':
+            /* ----- acordeón ----- */
+            case 'accordion': {
+              const isOpen = accordionOpen[idx] ?? false;
               return (
                 <Accordion key={idx}>
-                  <AccordionHeader onClick={() => toggleAccordion(idx)}>
+                  <AccordionHeader
+                    onClick={() =>
+                      setAccordionOpen((prev) => ({ ...prev, [idx]: !isOpen }))
+                    }
+                  >
                     {block.header}
-                    <span>{accordionOpen[idx] ? '−' : '+'}</span>
+                    <span>{isOpen ? '−' : '+'}</span>
                   </AccordionHeader>
-                  {accordionOpen[idx] && (
-                    <AccordionContent>{block.text}</AccordionContent>
+
+                  {isOpen && (
+                    <AccordionContent
+                      dangerouslySetInnerHTML={{
+                        __html: marked.parse(block.text),
+                      }}
+                    />
                   )}
                 </Accordion>
               );
+            }
 
             default:
               return null;
           }
         })}
 
+        {/* ---------- navegación entre temas ---------- */}
         <NavButtons>
           <NavButton onClick={() => onNavigateTheme('prev')} disabled={!hasPrev}>
             ← Tema Anterior

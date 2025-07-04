@@ -104,7 +104,14 @@ export const Heading = styled.h3`
   border-bottom: 2px solid ${({ theme }) => theme.colors.primarySoft};
   padding-bottom: 10px;
 `;
-export const List        = styled.ul`list-style:none;margin:0;padding:0;`;
+export const List = styled.ul`
+list-style:none;
+margin:0;
+padding:0;
+display: flex;
+flex-direction: column;
+gap:15px;
+`;
 export const ExpandIcon  = styled.span`
   margin-left:10px;font-size:.8em;user-select:none;`;
 
