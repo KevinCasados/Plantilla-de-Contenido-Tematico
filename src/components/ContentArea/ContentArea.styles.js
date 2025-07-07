@@ -52,6 +52,12 @@ export const ContentWrapper = styled.main`
     padding-top: 90px;
   }
 
+  /* ───────── NUEVO – contenedor de la animación ───────── */
+  .lottie-wrapper {
+    width: 100%;
+    margin: 40px 0 20px;
+  }
+
   ${({ $noContent }) =>
     $noContent &&
     css`
@@ -73,6 +79,7 @@ export const ThemeTitle = styled.h2`
   border-bottom: 3px solid ${({ theme }) => theme.colors.primarySoft};
   padding-bottom: 10px;
   text-transform: uppercase;
+  text-align: center;
 `;
 
 export const Paragraph = styled.p`
@@ -215,4 +222,44 @@ export const UnitInfoBox = styled.section`
   .objective{ ${card};border-left:5px solid ${({ theme }) => theme.colors.success};margin-bottom:20px;padding:15px; }
   .competencies{ list-style:none;padding:0;
     li{ ${card};border-left:4px solid ${({ theme }) => theme.colors.successSoft};margin-bottom:10px;padding:12px; } }
+`;
+
+/* ——— animación Lottie (centrada y responsiva) ——— */
+export const LottieBox = styled.div`
+  width: 100%;
+  max-width: none;       /* ancho máximo opcional */
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+
+  /* el <canvas> o <svg> que pinta la animación */
+  canvas,
+  svg {
+    width: 100% !important;   /* se adapta al 100 % del contenedor */
+   height: auto !important;  /* mantiene proporción */
+  }
+`;
+
+/* ——— botón de descarga con Lottie ——— */
+export const DownloadBtn = styled.a`
+  ${card};
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  margin: 25px 0;
+  background: ${({ theme }) => theme.colors.primary};
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .25s, transform .2s;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+    transform: translateY(-2px);
+  }
+
+  .lottie-icon { width: 28px; height: 28px; }
 `;
