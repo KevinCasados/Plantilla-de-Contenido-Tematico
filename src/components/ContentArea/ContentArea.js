@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { marked } from 'marked';
+import { Player } from '@lottiefiles/react-lottie-player';  // Import Player for Lottie animations
+import LottieRemote from '../common/LottieRemote';  
 import {
   /* bloques base */
   ContentWrapper,
@@ -13,6 +15,8 @@ import {
   Unordered,
   LinkBox,
   VideoBox,
+  LottieBox,         
+  DownloadBtn,  
 
   /* acordeón y navegación */
   Accordion,
@@ -102,8 +106,7 @@ function ContentArea({
 
   /* ⚠️ CAMBIO – evita repetir texto si numbering === title */
   const displayTitle =
-    theme.numbering &&
-    theme.numbering.trim() !== '' &&
+    theme.numbering && theme.numbering.trim() !== '' &&
     theme.numbering.trim() !== theme.title.trim()
       ? `${theme.numbering} ${theme.title}`
       : theme.title;
@@ -203,6 +206,37 @@ function ContentArea({
                 </Accordion>
               );
             }
+
+            /* ----- animación Lottie ----- */
+            case 'lottie':
+              return (
+                <LottieBox key={idx}>
+                  {/* Ahora LottieRemote ocupa 100 % por defecto */}
+                  <LottieRemote url={block.src} />
+                </LottieBox>
+              );
+
+            /* — botón con icono animado que descarga un PDF — */
+            case 'download':
+              return (
+                <DownloadBtn
+                  key={idx}
+                  href={block.href}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {block.icon && (
+                    <Player
+                      autoplay
+                      loop
+                      src={block.icon}
+                      className="lottie-icon"
+                    />
+                  )}
+                  {block.text || 'Descargar'}
+                </DownloadBtn>
+              );
 
             default:
               return null;
