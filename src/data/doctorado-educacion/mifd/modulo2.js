@@ -2,7 +2,7 @@
     MÓDULO 2 · Modelos de formación de formadores
     Fuente: MaterialDeEstudio-Modulo2.pdf
     ────────────────────────────────────────────────────────────── */
-
+const base = process.env.PUBLIC_URL + '/assets/MaterialComplementario/mifd';
 export default {
   /* 1 · claves de ruteo */
   programId: 'doctorado-educacion',   // carpeta de programa
@@ -751,7 +751,7 @@ de la práctica educativa.',
         /* ----------------------------------------------------------------------------------------- */
       ],
     },
-          /* -------------- Contenido Complementario -------------- */
+ /* -------------- Material Complementario -------------- */
   {
     id: 'cc',
     numbering: 'Material Complementario',
@@ -762,6 +762,21 @@ de la práctica educativa.',
         text:
           'Aquí aparecerán enlaces a PDFs, videos y sitios externos que amplían lo visto '
           + 'en el módulo.'
+      },
+
+      /* Animación central (usa DotLottieReact en el componente) */
+        {
+          type : 'lottie',
+          src  : 'https://lottie.host/c0d4b22d-190c-499c-ae7c-fbdc65bdec18/uwM2ByDoCU.lottie',
+        },
+        
+      {
+        type : 'download',
+        text : 'Descargar guías PDF',
+        files: [
+            `${base}/MaterialComplementario-Modulo2.pdf`,
+        ],
+        icon : 'https://lottie.host/03d343e5-0ec1-42a0-a414-9fc13133b936/DH3U5C7VP7.json'
       }
     ]
   },

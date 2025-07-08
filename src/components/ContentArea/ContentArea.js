@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { marked } from 'marked';
 import { Player } from '@lottiefiles/react-lottie-player';  // Import Player for Lottie animations
 import LottieRemote from '../common/LottieRemote';  
@@ -16,7 +16,10 @@ import {
   LinkBox,
   VideoBox,
   LottieBox,         
+
+  /* NUEVO contenedor para centrar el botón */
   DownloadBtn,  
+  DownloadWrapper, 
 
   /* acordeón y navegación */
   Accordion,
@@ -216,27 +219,38 @@ function ContentArea({
                 </LottieBox>
               );
 
-            /* — botón con icono animado que descarga un PDF — */
-            case 'download':
+            /* ---------- botón de descarga (uno o varios archivos) ---------- */
+            case 'download': {
+              const { text, href, files = [], icon } = block;
+              const list = href ? [href] : files; // normaliza a array
+
+              const handleDownload = () => {
+                list.forEach((url) => {
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = url.split('/').pop(); // nombre base
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                });
+              };
+
               return (
-                <DownloadBtn
-                  key={idx}
-                  href={block.href}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {block.icon && (
-                    <Player
-                      autoplay
-                      loop
-                      src={block.icon}
-                      className="lottie-icon"
-                    />
-                  )}
-                  {block.text || 'Descargar'}
-                </DownloadBtn>
+                <DownloadWrapper key={idx}>
+                  <DownloadBtn onClick={handleDownload}>
+                    {icon && (
+                      <Player
+                        autoplay
+                        loop
+                        src={icon}
+                        className="lottie-icon"
+                      />
+                    )}
+                    {text || 'Descargar'}
+                  </DownloadBtn>
+                </DownloadWrapper>
               );
+            }
 
             default:
               return null;
