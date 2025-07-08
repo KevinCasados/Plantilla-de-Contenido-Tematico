@@ -49,7 +49,7 @@ export const ContentWrapper = styled.main`
     width: 100%;
     max-width: 1500px;
     padding: 30px;
-    padding-top: 90px;
+    padding-top: 25px;
   }
 
   /* ───────── NUEVO – contenedor de la animación ───────── */
@@ -226,9 +226,10 @@ export const UnitInfoBox = styled.section`
 
 /* ——— animación Lottie (centrada y responsiva) ——— */
 export const LottieBox = styled.div`
-  width: 100%;
+  width: 75%;
   max-width: none;       /* ancho máximo opcional */
-  margin: 40px auto;
+  margin: 10px auto;
+  margin-bottom: 40px;
   display: flex;
   justify-content: center;
 
@@ -245,9 +246,10 @@ export const DownloadBtn = styled.a`
   ${card};
   display: inline-flex;
   align-items: center;
+  font-size: 1.2rem;
   gap: 10px;
   padding: 14px 28px;
-  margin: 25px 0;
+  margin: 25px auto;
   background: ${({ theme }) => theme.colors.primary};
   color: #fff;
   font-weight: 600;
@@ -261,5 +263,12 @@ export const DownloadBtn = styled.a`
     transform: translateY(-2px);
   }
 
-  .lottie-icon { width: 28px; height: 28px; }
+  .lottie-icon { width: 56px; height: 56px; }
+`;
+
+/* Centra el botón de descarga debajo de la animación */
+export const DownloadWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;   /* separa un poco del elemento anterior */
 `;

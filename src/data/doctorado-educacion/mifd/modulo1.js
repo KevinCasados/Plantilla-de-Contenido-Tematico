@@ -493,10 +493,12 @@ export default {
         },
         
       {
-        type: 'download',
-        text: 'Descargar guía PDF',
-        href: `${base}/MaterialComplementario-Modulo1.pdf`,        // coloca tu PDF en /public o /assets
-        icon: 'https://assets7.lottiefiles.com/packages/lf20_iwmd6pyr.json'
+        type : 'download',
+        text : 'Descargar guías PDF',
+        files: [
+            `${base}/MaterialComplementario-Modulo1.pdf`,
+        ],
+        icon : 'https://lottie.host/03d343e5-0ec1-42a0-a414-9fc13133b936/DH3U5C7VP7.json'
       }
     ]
   },
