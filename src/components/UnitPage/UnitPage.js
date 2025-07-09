@@ -3,17 +3,13 @@
       /programa/:programId/materia/:courseId/modulo/:moduleId
     ─────────────────────────────────────────────────────────────── */
 
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import {
-  getUnitData,
-  findThemeById,
-  flattenThemes,
-} from '../../data/loader';
+import { getUnitData, findThemeById, flattenThemes } from "../../data/loader";
 
-import Sidebar     from '../Sidebar/Sidebar';
-import ContentArea from '../ContentArea/ContentArea';
+import Sidebar from "../Sidebar/Sidebar";
+import ContentArea from "../ContentArea/ContentArea";
 
 import {
   UnitPageContainer,
@@ -22,7 +18,7 @@ import {
   ErrorMessage,
   EmptyMessage,
   Overlay,
-} from './UnitPage.styles';
+} from "./UnitPage.styles";
 
 /* ——— hook interno para media-query ——— */
 function useMediaQuery(query) {
@@ -33,8 +29,8 @@ function useMediaQuery(query) {
   useEffect(() => {
     const m = window.matchMedia(query);
     const listener = () => setMatches(m.matches);
-    m.addEventListener('change', listener);
-    return () => m.removeEventListener('change', listener);
+    m.addEventListener("change", listener);
+    return () => m.removeEventListener("change", listener);
   }, [query]);
 
   return matches;
@@ -42,8 +38,8 @@ function useMediaQuery(query) {
 
 /* ────────────────── COMPONENTE ────────────────── */
 function UnitPage() {
-  const { programId, courseId, moduleId } = useParams();      //  <-- nuevos params
-  const isMobile = useMediaQuery('(max-width: 1079px)');
+  const { programId, courseId, moduleId } = useParams(); //  <-- nuevos params
+  const isMobile = useMediaQuery("(max-width: 1079px)");
 
   /* ——— UI: estado del sidebar ——— */
   const [sidebarCollapsed, setSidebarCollapsed] = useState(isMobile);
@@ -51,44 +47,65 @@ function UnitPage() {
 
   /* escucha evento de la hamburguesa del Header */
   useEffect(() => {
-    window.addEventListener('burger-toggle', toggleSidebar);
-    return () => window.removeEventListener('burger-toggle', toggleSidebar);
+    window.addEventListener("burger-toggle", toggleSidebar);
+    return () => window.removeEventListener("burger-toggle", toggleSidebar);
   }, []);
 
   /* bloquea / libera scroll body cuando panel abierto en móvil */
   useEffect(() => {
     if (!isMobile) return;
-    document.body.style.overflow = sidebarCollapsed ? 'auto' : 'hidden';
-    return () => { document.body.style.overflow = 'auto'; };
+    document.body.style.overflow = sidebarCollapsed ? "auto" : "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [sidebarCollapsed, isMobile]);
 
   /* fuerza colapso si cambia a escritorio */
-  useEffect(() => { setSidebarCollapsed(isMobile); }, [isMobile]);
+  useEffect(() => {
+    setSidebarCollapsed(isMobile);
+  }, [isMobile]);
 
   /* ——— DATA: carga del módulo ——— */
-  const [unit, setUnit]           = useState(null);
+  const [unit, setUnit] = useState(null);
   const [currentThemeId, setCurrentThemeId] = useState(null);
-  const [loading, setLoading]     = useState(true);
-  const [error, setError]         = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [transitionClass, setTransitionClass] = useState('');
-  const [expandedThemes, setExpandedThemes]   = useState({});
+  const [transitionClass, setTransitionClass] = useState("");
+  const [expandedThemes, setExpandedThemes] = useState({});
 
   useEffect(() => {
-    setLoading(true); setError(null);
+    setLoading(true);
+    setError(null);
 
     const data = getUnitData(programId, courseId, moduleId);
-    if (!data) { setError('Unit not found'); setLoading(false); return; }
+    if (!data) {
+      setError("Unit not found");
+      setLoading(false);
+      return;
+    }
 
     setUnit(data);
 
-    /* tema inicial */
-    const firstTheme =
-      findThemeById(data.themes, `${moduleId}.info`) || data.themes[0];
+    /* ───── 1 · leer del sessionStorage ───── */
+    const storageKey = `lastTheme-${moduleId}`;
+    const savedId = sessionStorage.getItem(storageKey);
 
-    setCurrentThemeId(firstTheme?.id || null);
+    /* si existe y está dentro de los temas, arranca ahí */
+    const initial =
+      savedId && findThemeById(data.themes, savedId)
+        ? savedId
+        : findThemeById(data.themes, `${moduleId}.info`) || data.themes[0].id;
+
+    setCurrentThemeId(initial);
     setLoading(false);
   }, [programId, courseId, moduleId]);
+
+  /* ───── 2 · persistir cada cambio ───── */
+  useEffect(() => {
+    if (!currentThemeId) return;
+    sessionStorage.setItem(`lastTheme-${moduleId}`, currentThemeId);
+  }, [currentThemeId, moduleId]);
 
   /* expande padres del tema activo */
   useEffect(() => {
@@ -97,9 +114,13 @@ function UnitPage() {
       const next = { ...prev };
       const openParents = (list, id) => {
         for (const t of list) {
-          if (t.id === id) { next[t.id] = true; return true; }
+          if (t.id === id) {
+            next[t.id] = true;
+            return true;
+          }
           if (t.subthemes?.length && openParents(t.subthemes, id)) {
-            next[t.id] = true; return true;
+            next[t.id] = true;
+            return true;
           }
         }
         return false;
@@ -110,36 +131,36 @@ function UnitPage() {
   }, [unit, currentThemeId]);
 
   /* ——— navegación lineal (prev/next) ——— */
-  const flat     = unit ? flattenThemes(unit.themes) : [];
-  const idx      = flat.findIndex((t) => t.id === currentThemeId);
-  const hasPrev  = idx > 0;
-  const hasNext  = idx < flat.length - 1;
+  const flat = unit ? flattenThemes(unit.themes) : [];
+  const idx = flat.findIndex((t) => t.id === currentThemeId);
+  const hasPrev = idx > 0;
+  const hasNext = idx < flat.length - 1;
 
   const changeTheme = (id) => {
-    setTransitionClass('fade-out');
+    setTransitionClass("fade-out");
     setTimeout(() => {
       setCurrentThemeId(id);
-      setTransitionClass('');
+      setTransitionClass("");
       if (isMobile) setSidebarCollapsed(true);
     }, 300);
   };
 
   const navigate = (dir) => {
-    setTransitionClass('fade-out');
+    setTransitionClass("fade-out");
     setTimeout(() => {
       const next =
-        dir === 'next'
+        dir === "next"
           ? Math.min(flat.length - 1, idx + 1)
           : Math.max(0, idx - 1);
       setCurrentThemeId(flat[next].id);
-      setTransitionClass('');
+      setTransitionClass("");
     }, 300);
   };
 
   /* ——— render ——— */
   if (loading) return <LoadingMessage>Cargando unidad…</LoadingMessage>;
-  if (error)   return <ErrorMessage>{error}</ErrorMessage>;
-  if (!unit)   return <EmptyMessage>Unidad no encontrada.</EmptyMessage>;
+  if (error) return <ErrorMessage>{error}</ErrorMessage>;
+  if (!unit) return <EmptyMessage>Unidad no encontrada.</EmptyMessage>;
 
   const currentTheme = findThemeById(unit.themes, currentThemeId);
 

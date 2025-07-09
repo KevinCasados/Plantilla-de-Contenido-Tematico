@@ -239,6 +239,10 @@ export const LottieBox = styled.div`
     width: 100% !important;   /* se adapta al 100 % del contenedor */
    height: auto !important;  /* mantiene proporción */
   }
+
+  @media (max-width: 1100px) {
+  width: 100%;
+  }
 `;
 
 /* ——— botón de descarga con Lottie ——— */
@@ -246,10 +250,14 @@ export const DownloadBtn = styled.a`
   ${card};
   display: inline-flex;
   align-items: center;
-  font-size: 1.2rem;
-  gap: 10px;
-  padding: 14px 28px;
-  margin: 25px auto;
+  gap: 0.65em;
+
+  /* 5 % más pequeño que antes */
+  font-size: clamp(0.95rem, 1.14vw + 0.71rem, 1.19rem);
+
+  padding: clamp(9.5px, 1.23vw, 13.3px) clamp(21px, 2.85vw, 32px);
+
+  margin: 2.2rem auto;
   background: ${({ theme }) => theme.colors.primary};
   color: #fff;
   font-weight: 600;
@@ -263,7 +271,11 @@ export const DownloadBtn = styled.a`
     transform: translateY(-2px);
   }
 
-  .lottie-icon { width: 56px; height: 56px; }
+  .lottie-icon{
+    width: 2.66em;  /* 5 % menos que 2.8 em */
+    height: 2.66em;
+    flex-shrink: 0;
+  }
 `;
 
 /* Centra el botón de descarga debajo de la animación */
@@ -271,4 +283,49 @@ export const DownloadWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 40px;   /* separa un poco del elemento anterior */
+`;
+
+/* ——— Bibliography: lista desplazable + animación grande ——— */
+export const BibliographyGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;          /* siempre 1 columna             */
+  row-gap: 48px;
+
+  /* LISTA ----------------------------------------------------------- */
+  & > .biblio-list {
+  /* sin límite de alto ni scrollbar interno */
+    overflow: visible;
+    padding-right: 0;     /* (opcional) elimina el pequeño margen derecho */
+  }
+
+  /* ANIMACIÓN ------------------------------------------------------- */
+  & > .lottie-block {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 90%;                        /* deja respirar a los costados  */
+    max-width: 680px;                  /* más ancha → apariencia mayor  */
+  }
+
+  /* ------------- Desactivar el alto fijo de la lista en móviles ----------- */
+  @media (max-width: 930px) {
+    & > .biblio-list {
+      max-height: none;    /* la lista vuelve a crecer libremente  */
+      overflow: visible;   /* se quita su scroll interno           */
+    }
+  }
+
+  @media (max-width: 600px) {
+  /* el UL que envuelve los <li> de bibliografía */
+  & > .biblio-list {
+    overflow-x: hidden;      /* nunca barra horizontal interna   */
+    padding-right: 0.5rem;   /* un poco de aire contra el borde  */
+  }
+
+  /* cada elemento de la lista y los enlaces interiores */
+  & > .biblio-list li,
+  & > .biblio-list a {
+    word-break: break-word;  /* permite cortar palabros y URLs   */
+  }
+}
 `;

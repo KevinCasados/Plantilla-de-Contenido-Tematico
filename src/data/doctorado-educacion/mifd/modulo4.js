@@ -727,17 +727,30 @@ competencies : [
   },
 
   /* ---------------------- Bibliografía ------------------- */
-  {
-    id: 'bib',
-    numbering: 'Bibliografía',
-    title: 'Bibliografía',
-    content: [
-      {
-        type: 'paragraph',
-        text:
-          'En esta sección se listarán las referencias completas utilizadas en el módulo.'
-      }
+{
+  id: 'bib',
+  numbering: 'Bibliografía',
+  title: 'Bibliografía',
+  content: [
+    {
+  type : 'list',
+  style: 'unordered',
+    items: [
+        'Assmann, H. (2002). *Placer y ternura en la educación. Hacia una sociedad aprendiente.* Barcelona: Narcea Ediciones.',
+        'Calvo Muñoz, C. (2008). *Del mapa escolar al territorio educativo. Diseñando la escuela desde la educación.* Santiago de Chile: Nueva Miranda Ediciones.',
+        'Canal Martínez, M., Del Callejo, D., Hernández Á., Ochoa C., O., Peredo C., B. & Velasco T., J. (2011). *La educación relacional: Hacia un nuevo paradigma educativo.* Xalapa, México: Arana Editores.',
+        'Gutiérrez Pérez, F. & Prieto Castillo, D. (1994). *Mediación pedagógica para la educación popular.* San José, Costa Rica: RNTC.',
+        'Wagensberg, J. (2007). *El gozo intelectual. Teoría y práctica sobre la inteligibilidad y la belleza.* Barcelona: Tusquets.'
     ]
-  }
+    },
+
+     /* ⬇⬇ NUEVO bloque para la animación ⬇⬇ */
+    {
+      type : 'lottie',
+      src  : 'https://lottie.host/822f7426-9c06-4a7f-85ad-f9e795d72fd6/09OzrRtAat.json'
+            // pon aquí la animación que quieras
+    }
   ]
-};  
+},
+  ],
+};
