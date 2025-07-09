@@ -504,17 +504,33 @@ export default {
   },
 
   /* ---------------------- Bibliografía ------------------- */
-  {
-    id: 'bib',
-    numbering: 'Bibliografía',
-    title: 'Bibliografía',
-    content: [
-      {
-        type: 'paragraph',
-        text:
-          'En esta sección se listarán las referencias completas utilizadas en el módulo.'
-      }
-    ]
-  }
+{
+  id: 'bib',
+  numbering: 'Bibliografía',
+  title: 'Bibliografía',
+  content: [
+    {
+      type : 'list',
+      style: 'unordered',
+      items: [
+        'Calvo Muñoz, C. (2013). *Del mapa escolar al territorio educativo. Diseñando la escuela desde la educación* (5.ª ed.). Universidad de la Serena. Disponible en: https://ipecal.edu.mx/wp-content/uploads/Del-mapa-escolar-al-territorio-educativo-Diso%C3%B1ando-la-escuela-desde-la-educaci%C3%B3n-by-Carlos-Calvo-Mu%C3%B1oz-z-lib.org_.pdf',
+        'Capra, F. (1998). *El punto crucial. Ciencia, sociedad y cultura naciente.* Editorial Estaciones. Disponible en: https://docs.google.com/file/d/0ByRMadzMwWYHMzBoX2JocThGQU0/view',
+        'Freire, P. (2004). *Pedagogía de la autonomía.* Paz e Terra. Disponible en: https://www.buenosaires.gob.ar/areas/salud/dircap/mat/matbiblio/freire.pdf',
+        'Gutiérrez, F. (1994). *La mediación pedagógica para la educación.* RNTC, San José (Costa Rica).',
+        'Ornelas, C. (2013). *El Sistema Educativo Mexicano. La transición de fin de siglo.* Fondo de Cultura Económica.',
+        'Pérez Gómez, A. (2008). *Comprender y transformar la enseñanza. La función y formación del profesor/a.* Editorial Morata. Disponible en: https://ariselaortega.files.wordpress.com/2013/11/2-comprender-y-transformar-la-ensec3b1anza-sacristc3a1n.pdf',
+        'Rodríguez, A. (1994). *Problemas, desafíos y mitos en la formación docente.* Perfiles Educativos, 63, Instituto sobre la Universidad y la Educación.',
+        'Ruiz Bueno, C. (2001). *Evaluación de programas de formación de formadores: paradigmas y modelos de formación* (Tesis doctoral). Universidad de Barcelona. Disponible en: https://www.tdx.cat/bitstream/handle/10803/5003/crb03de12.pdf'
+      ]
+    },
+
+     /* ⬇⬇ NUEVO bloque para la animación ⬇⬇ */
+    {
+      type : 'lottie',
+      src  : 'https://lottie.host/822f7426-9c06-4a7f-85ad-f9e795d72fd6/09OzrRtAat.json'
+            // pon aquí la animación que quieras
+    }
+  ]
+},
   ],
 };

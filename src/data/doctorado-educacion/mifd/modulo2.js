@@ -781,18 +781,29 @@ de la práctica educativa.',
     ]
   },
 
-  /* ---------------------- Bibliografía ------------------- */
-  {
-    id: 'bib',
-    numbering: 'Bibliografía',
-    title: 'Bibliografía',
-    content: [
-      {
-        type: 'paragraph',
-        text:
-          'En esta sección se listarán las referencias completas utilizadas en el módulo.'
-      }
-    ]
-  }
+/* ---------------------- Bibliografía ------------------- */
+{
+  id: 'bib',
+  numbering: 'Bibliografía',
+  title: 'Bibliografía',
+  content: [
+    {
+      type : 'list',
+      style: 'unordered',
+      items: [
+        'Freire, P. (2004). *Pedagogía de la autonomía.* Paz e Terra. Disponible en: https://www.buenosaires.gob.ar/areas/salud/dircap/mat/matbiblio/freire.pdf',
+        'Pérez Gómez, A. (2008). *Comprender y transformar la enseñanza. La función y formación del profesor/a.* Editorial Morata. Disponible en: https://ariselaortega.files.wordpress.com/2013/11/2-comprender-y-transformar-la-ensec3b1anza-sacristc3a1n.pdf',
+        'Ruiz Bueno, C. (2001). *Evaluación de programas de formación de formadores: paradigmas y modelos de formación* (Tesis doctoral). Universidad de Barcelona. Disponible en: https://www.tdx.cat/bitstream/handle/10803/5003/crb03de12.pdf'
+      ]
+    },
+
+     /* ⬇⬇ NUEVO bloque para la animación ⬇⬇ */
+    {
+      type : 'lottie',
+      src  : 'https://lottie.host/822f7426-9c06-4a7f-85ad-f9e795d72fd6/09OzrRtAat.json'
+            // pon aquí la animación que quieras
+    }
+  ]
+},
   ],
 };

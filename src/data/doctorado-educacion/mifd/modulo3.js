@@ -468,7 +468,7 @@ competencies : [
             /* — Imagen 1 — */
             {
                 type: 'image',
-                src: 'https://i.imgur.com/US9xcJz.png',
+                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1mJf61AYP9RpfGXaeJTys6XenuAUUvN8DBg&s',
                 alt: 'Convergencia ciencia-arte-espiritualidad',
                 caption: 'Figura 1. Trenzar razón, emoción y trascendencia da sentido al aprender.'
             },
@@ -567,17 +567,42 @@ competencies : [
   },
 
   /* ---------------------- Bibliografía ------------------- */
-  {
-    id: 'bib',
-    numbering: 'Bibliografía',
-    title: 'Bibliografía',
-    content: [
-      {
-        type: 'paragraph',
-        text:
-          'En esta sección se listarán las referencias completas utilizadas en el módulo.'
-      }
-    ]
-  }
+{
+  id: 'bib',
+  numbering: 'Bibliografía',
+  title: 'Bibliografía',
+  content: [
+    {
+      type : 'list',
+      style: 'unordered',
+      items: [
+        'Assmann, H. (2002). *Placer y ternura en la educación. Hacia una sociedad aprendiente.* Barcelona: Narcea.',
+        'Boff, L. (2002). *El cuidado esencial. Ética de lo humano, compasión por la Tierra.* Madrid: Trotta.',
+        'Bohm, D. (2002). *Sobre la creatividad.* Barcelona: Kairós.',
+        'Bohm, D. (2002). *La totalidad y el orden implicado.* Barcelona: Kairós.',
+        'Briggs, J. & Peat, D. (1999). *Las siete leyes del caos.* Barcelona: Grijalbo.',
+        'Capra, F. (1998). *El punto crucial. Ciencia, sociedad y cultura naciente.* Buenos Aires: Estaciones.',
+        'Gallegos Nava, R. (1997). *El destino indivisible de la educación.* México: Pax.',
+        'Gallegos Nava, R. (1999). *Pedagogía del amor universal. Educación holista.* México: Pax.',
+        'Lovelock, J. (2007). *La venganza de la Tierra. Teoría de Gaia y el futuro de la humanidad.* Barcelona: Planeta.',
+        'Martínez, H. G. (2015). *Reeducar al educador. Una propuesta para desaprender lo aprendido y aprender lo nuevo* (Tesis doctoral). UPAV, Xalapa (México).',
+        'Martínez, M. M. (2011). “Paradigmas emergentes y ciencias de la complejidad”. *Opción*, 27(65), Univ. Simón Bolívar, Caracas.',
+        'Maturana, H. & Varela, F. (1997). *De máquinas y seres vivos. Autopoiesis: la organización de lo vivo.* Santiago de Chile: Universitaria.',
+        'Maturana, H. (2001). *Emociones y lenguaje en educación y política.* Santiago de Chile: Dolmen.',
+        'Maturana, H. (2002). *Transformación en la convivencia.* Santiago de Chile: Dolmen.',
+        'Morín, E. (2000). *La mente bien ordenada.* Barcelona: Barral.',
+        'Morín, E. (2001). *Los siete saberes necesarios para la educación del futuro.* México: UNESCO-Correo.',
+        'Morín, E. (2003). *Introducción al pensamiento complejo* (6.ª reimp.). Barcelona: Gedisa.'
+        ]
+    },
+
+     /* ⬇⬇ NUEVO bloque para la animación ⬇⬇ */
+    {
+      type : 'lottie',
+      src  : 'https://lottie.host/822f7426-9c06-4a7f-85ad-f9e795d72fd6/09OzrRtAat.json'
+            // pon aquí la animación que quieras
+    }
   ]
+},
+  ],
 };

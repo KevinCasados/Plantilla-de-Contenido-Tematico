@@ -20,6 +20,7 @@ import {
   /* NUEVO contenedor para centrar el botón */
   DownloadBtn,  
   DownloadWrapper, 
+  BibliographyGrid,  
 
   /* acordeón y navegación */
   Accordion,
@@ -114,14 +115,43 @@ function ContentArea({
       ? `${theme.numbering} ${theme.title}`
       : theme.title;
 
+        /* ──── NEW ➜ localizamos bloques para bibliografía ──── */
+      const listBlock = theme.content.find((b) => b.type === 'list');       // la lista UL
+      const lottieBlock = theme.content.find((b) => b.type === 'lottie');   // la animación
+
   return (
     <ContentWrapper className={transitionClass}>
       <div className="inner">
         {/* Título sin duplicaciones */}
         <ThemeTitle>{displayTitle}</ThemeTitle>
 
-        {theme.content.map((block, idx) => {
-          switch (block.type) {
+        {/* ───── NEW: sólo si es la sección “bib” ───── */}
+        {theme.id === 'bib' && listBlock && (
+          <BibliographyGrid>
+            {/* columna izquierda – referencias */}
+            <div className="biblio-list">
+              <Unordered>
+                {listBlock.items.map((it, i) => (
+                  <li
+                    key={i}
+                    dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }}
+                  />
+                ))}
+              </Unordered>
+            </div>
+
+            {/* columna derecha – animación */}
+            {lottieBlock && (
+              <div className="lottie-block">
+                <LottieRemote url={lottieBlock.src} />
+              </div>
+            )}
+          </BibliographyGrid>
+        )}
+
+        {theme.id !== 'bib' &&
+          theme.content.map((block, idx) => {
+            switch (block.type) {
             /* ----- texto en Markdown ----- */
             case 'paragraph':
               return (

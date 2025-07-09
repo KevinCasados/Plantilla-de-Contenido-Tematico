@@ -11,7 +11,7 @@ import {
   SubscribeSection,
   FooterBottom,
   FooterContact,
-} from './styles';
+} from './footer.styles.js';
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaTwitch, FaGithub } from 'react-icons/fa';
 import { FaX, FaXTwitter } from 'react-icons/fa6';
 
