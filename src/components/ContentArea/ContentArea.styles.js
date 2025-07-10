@@ -114,8 +114,8 @@ export const Figure = styled.figure`
 export const BlockQuote = styled.blockquote`
   margin: 1.5rem 0;
   padding: 1rem 1.5rem;
-  border-left: 4px solid ${({ theme }) => theme.colors.primary};
-  background: ${({ theme }) => theme.colors.primaryExtraSoft};
+  border-left: 4px solid ${({ theme }) => theme.colors.accordionTicket};
+  background: ${({ theme }) => theme.colors.accordionBackground};
   font-style: italic;
 `;
 
@@ -164,7 +164,7 @@ export const Accordion = styled.div`
 `;
 export const AccordionHeader = styled.button`
   width: 100%;
-  background: ${({ theme }) => theme.colors.primaryExtraSoft};
+  background: ${({ theme }) => theme.colors.accordionBackground};
   color: ${({ theme }) => theme.colors.titles};
   padding: 15px 20px;
   border: none;
