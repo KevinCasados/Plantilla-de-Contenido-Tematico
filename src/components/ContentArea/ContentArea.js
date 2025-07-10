@@ -16,9 +16,12 @@ function ContentArea({
   unit, theme, onNavigateTheme, hasPrev, hasNext, transitionClass,
 }) {
   const [accordionOpen, setAccordionOpen] = useState({});
-  const innerRef = useRef(null);
 
-  /* — abrir acordeones por defecto — */
+  /* refs */
+  const wrapperRef = useRef(null);   // ⇠  contenedor que scrollea
+  const innerRef   = useRef(null);   // ⇠  div.inner (ScrollReveal)
+
+  /* — abrir acordeones con open:true — */
   useEffect(() => {
     if (!theme) return;
     const init = {};
@@ -28,28 +31,36 @@ function ContentArea({
     setAccordionOpen(init);
   }, [theme]);
 
-  /* — ScrollReveal por cambio de tema — */
+  /* — desplazarse al inicio al cambiar de tema — */
+useEffect(() => {
+  // Contenedor con scroll interno
+  wrapperRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+
+  // Ventana / página completa
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+}, [theme]);
+
+  /* — ScrollReveal (usa el contenedor que scrollea) — */
   useEffect(() => {
     if (!innerRef.current) return;
 
-    const scrollContainer = innerRef.current.parentNode;
     ScrollReveal().clean(innerRef.current.querySelectorAll('.sr-item'));
 
     ScrollReveal({
-      distance: '40px',
-      duration: 800,
-      easing: 'ease-out',
-      origin: 'bottom',
-      container: scrollContainer,
+      distance  : '40px',
+      duration  : 800,
+      easing    : 'ease-out',
+      origin    : 'bottom',
+      container : wrapperRef.current,  // ← escucha al ContentWrapper
       viewFactor: 0.15,
-      reset: false,                          // anima cada vez
+      reset     : false,               // anima solo la 1ª vez
     }).reveal(innerRef.current.querySelectorAll('.sr-item'), { interval: 100 });
   }, [theme]);
 
-  /* — estado de carga — */
+  /* — loading — */
   if (!theme || !unit) {
     return (
-      <ContentWrapper $noContent className={transitionClass}>
+      <ContentWrapper ref={wrapperRef} $noContent className={transitionClass}>
         <div className="inner" ref={innerRef}>Cargando contenido…</div>
       </ContentWrapper>
     );
@@ -58,7 +69,7 @@ function ContentArea({
   /* — Información general del módulo — */
   if (theme.isUnitInfo) {
     return (
-      <ContentWrapper className={transitionClass}>
+      <ContentWrapper ref={wrapperRef} className={transitionClass}>
         <div className="inner" ref={innerRef}>
           <UnitInfoBox className="sr-item">
             <h2 className="unit-title">{unit.courseName}</h2>
@@ -104,10 +115,10 @@ function ContentArea({
   const lottieBlock = theme.content.find(b => b.type === 'lottie');
 
   return (
-    <ContentWrapper className={transitionClass}>
+    <ContentWrapper ref={wrapperRef} className={transitionClass}>
       <div className="inner" ref={innerRef}>
 
-        {/* título: clave única por tema */}
+        {/* título con clave única */}
         <ThemeTitle key={`title-${theme.id}`} className="sr-item">
           {displayTitle}
         </ThemeTitle>
@@ -131,9 +142,9 @@ function ContentArea({
           </BibliographyGrid>
         )}
 
-        {/* — Bloques variados — */}
+        {/* — Resto de bloques — */}
         {theme.id !== 'bib' && theme.content.map((block, idx) => {
-          const key = `${theme.id}-${block.type}-${idx}`;   /* ← incluye theme.id */
+          const key = `${theme.id}-${block.type}-${idx}`;
 
           switch (block.type) {
             case 'paragraph':
@@ -241,7 +252,7 @@ function ContentArea({
           }
         })}
 
-        {/* — navegación inferior — */}
+        {/* navegación inferior */}
         <NavButtons>
           <NavButton onClick={() => onNavigateTheme('prev')} disabled={!hasPrev}>
             ← Tema Anterior
