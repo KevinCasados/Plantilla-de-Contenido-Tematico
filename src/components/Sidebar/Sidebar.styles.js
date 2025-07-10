@@ -99,7 +99,7 @@ export const SidebarWrapper = styled.aside`
 export const Heading = styled.h3`
   margin: 0 0 25px;
   font-size: 1.2em;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.titles};
   text-transform: uppercase;
   border-bottom: 2px solid ${({ theme }) => theme.colors.primarySoft};
   padding-bottom: 10px;

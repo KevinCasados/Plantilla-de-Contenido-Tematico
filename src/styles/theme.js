@@ -11,6 +11,7 @@ export const lightTheme = {
 
     /* --- primarios --- */
     primary:      '#0d47a1',
+    titles: '#0d47a1',
     primaryDark:  '#003bb3',
     primarySoft:  '#bbdefb',
     primaryExtraSoft: '#e3f2fd',
@@ -53,7 +54,8 @@ export const darkTheme = {
     divider:      '#2e2e2e',
 
     /* --- primarios --- */
-    primary:      '#4d8dff',
+    primary:      '#0d47a1',
+    titles: '#ffffff',
     primaryDark:  '#2860c7',
     primarySoft:  '#375eaa',
     primaryExtraSoft: '#2d3d6b',
