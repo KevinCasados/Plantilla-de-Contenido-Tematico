@@ -75,7 +75,7 @@ export const ContentWrapper = styled.main`
 export const ThemeTitle = styled.h2`
   font-size: 2rem;
   margin-bottom: 25px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.titles};
   border-bottom: 3px solid ${({ theme }) => theme.colors.primarySoft};
   padding-bottom: 10px;
   text-transform: uppercase;
@@ -165,7 +165,7 @@ export const Accordion = styled.div`
 export const AccordionHeader = styled.button`
   width: 100%;
   background: ${({ theme }) => theme.colors.primaryExtraSoft};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.titles};
   padding: 15px 20px;
   border: none;
   font-size: 1.05em;
@@ -215,7 +215,7 @@ export const UnitInfoBox = styled.section`
   background: ${({ theme }) => theme.colors.successLight};
   margin-bottom: 25px;
   padding: 25px;
-  .unit-title   { text-align:center;font-size:2.2em;margin:10px 0;color:${({theme})=>theme.colors.primary}; }
+  .unit-title   { text-align:center;font-size:2.2em;margin:10px 0;color:${({theme})=>theme.colors.titles}; }
   .unit-subtitle{ text-align:center;font-size:1.6em;margin-bottom:25px;color:${({theme})=>theme.colors.success}; }
   .unit-meta    { font-size:1.05em;margin-bottom:8px; }
   .section-heading{ font-size:1.35em;margin:25px 0 12px;color:${({theme})=>theme.colors.success}; }
