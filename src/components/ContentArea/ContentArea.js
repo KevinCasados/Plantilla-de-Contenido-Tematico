@@ -1,50 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { marked } from 'marked';
-import { Player } from '@lottiefiles/react-lottie-player';  // Import Player for Lottie animations
-import LottieRemote from '../common/LottieRemote';  
+import ScrollReveal from 'scrollreveal';               //  ←  ya lo usábamos
+import { Player } from '@lottiefiles/react-lottie-player';
+import LottieRemote from '../common/LottieRemote';
+
+/* ───── importaciones de styled-components (sin cambios) ───── */
 import {
-  /* bloques base */
-  ContentWrapper,
-  ThemeTitle,
-  Paragraph,
-
-  /* multimedia y listas */
-  Figure,
-  BlockQuote,
-  Ordered,
-  Unordered,
-  LinkBox,
-  VideoBox,
-  LottieBox,         
-
-  /* NUEVO contenedor para centrar el botón */
-  DownloadBtn,  
-  DownloadWrapper, 
-  BibliographyGrid,  
-
-  /* acordeón y navegación */
-  Accordion,
-  AccordionHeader,
-  AccordionContent,
-  NavButtons,
-  NavButton,
-
-  /* cuadro información de la unidad */
-  UnitInfoBox,
+  ContentWrapper, ThemeTitle, Paragraph,
+  Figure, BlockQuote, Ordered, Unordered, LinkBox, VideoBox,
+  LottieBox, DownloadBtn, DownloadWrapper,
+  BibliographyGrid, Accordion, AccordionHeader, AccordionContent,
+  NavButtons, NavButton, UnitInfoBox
 } from './ContentArea.styles';
 
+/* -------------------------------------------------------------------------- */
+/*                                   Main                                     */
+/* -------------------------------------------------------------------------- */
 function ContentArea({
   unit,
   theme,
   onNavigateTheme,
   hasPrev,
   hasNext,
-  transitionClass,
+  transitionClass
 }) {
-  /* ---------- ESTADO DEL ACORDEÓN ---------- */
   const [accordionOpen, setAccordionOpen] = useState({});
+  const innerRef = useRef(null);          // <div className="inner"> (contenido)
 
-  /*  abre de forma predeterminada los bloques con { open:true }  */
+  /* ────────────────────── 1. acordeones abiertos por defecto ───────────── */
   useEffect(() => {
     if (!theme) return;
     const init = {};
@@ -54,93 +37,97 @@ function ContentArea({
     setAccordionOpen(init);
   }, [theme]);
 
-  /* ---------- CARGANDO / SIN CONTENIDO ---------- */
-  if (!theme || !unit)
+  /* ────────────────────── 2. ScrollReveal por tema ─────────────────────── */
+  useEffect(() => {
+    if (!innerRef.current) return;
+
+    // el contenedor que realmente hace *scroll* es <ContentWrapper>,
+    // que es el elemento padre directo de `.inner`
+    const scrollContainer = innerRef.current.parentNode;
+
+    // 1) limpiamos animaciones previas
+    ScrollReveal().clean(innerRef.current.querySelectorAll('.sr-item'));
+
+    // 2) registramos las nuevas animaciones
+    ScrollReveal({
+      distance   : '40px',
+      duration   : 800,
+      easing     : 'ease-out',
+      origin     : 'bottom',
+      reset      : false,
+      viewFactor : 0.15,           // 15 % visible para disparar
+      container  : scrollContainer // ⭐ ¡aquí el cambio importante!
+    }).reveal(innerRef.current.querySelectorAll('.sr-item'), { interval: 100 });
+  }, [theme]);                              // se ejecuta cada vez que cambia de tema
+
+  /* ────────────────────── 3. pantalla de carga ─────────────────────────── */
+  if (!theme || !unit) {
     return (
       <ContentWrapper $noContent className={transitionClass}>
-        <div className="inner">Cargando contenido…</div>
+        <div className="inner" ref={innerRef}>Cargando contenido…</div>
       </ContentWrapper>
     );
+  }
 
-  /* ---------- INFORMACIÓN GENERAL DEL MÓDULO ---------- */
+  /* ────────────────────── 4. Información general del módulo ────────────── */
   if (theme.isUnitInfo) {
     return (
       <ContentWrapper className={transitionClass}>
-        <div className="inner">
-          <UnitInfoBox>
+        <div className="inner" ref={innerRef}>
+          <UnitInfoBox className="sr-item">
             <h2 className="unit-title">{unit.courseName}</h2>
             <h3 className="unit-subtitle">{unit.title}</h3>
 
-            <p className="unit-meta">
-              <strong>Semestre:</strong> {unit.semestre}
-            </p>
-            <p className="unit-meta">
-              <strong>Docente:</strong> {unit.teacher}
-            </p>
+            <p className="unit-meta"><strong>Semestre:</strong> {unit.semestre}</p>
+            <p className="unit-meta"><strong>Docente:</strong> {unit.teacher}</p>
 
             <h4 className="section-heading">Objetivo</h4>
             <p className="objective">{unit.objective}</p>
 
-            <h4 className="section-heading">Competencias</h4>
-            <ul className="competencies">
-              {unit.competencies?.map((c, i) => (
-                <li key={i}>{c}</li>
-              ))}
-            </ul>
+            {unit.competencies?.length > 0 && (
+              <>
+                <h4 className="section-heading">Competencias</h4>
+                <ul className="competencies">
+                  {unit.competencies.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </>
+            )}
           </UnitInfoBox>
 
           <NavButtons>
-            <NavButton onClick={() => onNavigateTheme('prev')} disabled={!hasPrev}>
-              ← Tema Anterior
-            </NavButton>
-            <NavButton
-              $next
-              onClick={() => onNavigateTheme('next')}
-              disabled={!hasNext}
-            >
-              Tema Siguiente →
-            </NavButton>
+            <NavButton onClick={() => onNavigateTheme('prev')} disabled={!hasPrev}>← Tema Anterior</NavButton>
+            <NavButton $next onClick={() => onNavigateTheme('next')} disabled={!hasNext}>Tema Siguiente →</NavButton>
           </NavButtons>
         </div>
       </ContentWrapper>
     );
   }
 
-  /* ---------- CONTENIDO DEL TEMA ---------- */
-
-  /* ⚠️ CAMBIO – evita repetir texto si numbering === title */
+  /* ────────────────────── 5. Secciones normales ────────────────────────── */
   const displayTitle =
-    theme.numbering && theme.numbering.trim() !== '' &&
-    theme.numbering.trim() !== theme.title.trim()
+    theme.numbering && theme.numbering.trim() !== '' && theme.numbering.trim() !== theme.title.trim()
       ? `${theme.numbering} ${theme.title}`
       : theme.title;
 
-        /* ──── NEW ➜ localizamos bloques para bibliografía ──── */
-      const listBlock = theme.content.find((b) => b.type === 'list');       // la lista UL
-      const lottieBlock = theme.content.find((b) => b.type === 'lottie');   // la animación
+  const listBlock   = theme.content.find((b) => b.type === 'list');
+  const lottieBlock = theme.content.find((b) => b.type === 'lottie');
 
   return (
     <ContentWrapper className={transitionClass}>
-      <div className="inner">
-        {/* Título sin duplicaciones */}
-        <ThemeTitle>{displayTitle}</ThemeTitle>
+      <div className="inner" ref={innerRef}>
+        <ThemeTitle className="sr-item">{displayTitle}</ThemeTitle>
 
-        {/* ───── NEW: sólo si es la sección “bib” ───── */}
+        {/* ---- Bibliografía (en grid) ---- */}
         {theme.id === 'bib' && listBlock && (
-          <BibliographyGrid>
-            {/* columna izquierda – referencias */}
+          <BibliographyGrid className="sr-item">
             <div className="biblio-list">
               <Unordered>
                 {listBlock.items.map((it, i) => (
-                  <li
-                    key={i}
-                    dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }}
-                  />
+                  <li key={i} dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }} />
                 ))}
               </Unordered>
             </div>
 
-            {/* columna derecha – animación */}
             {lottieBlock && (
               <div className="lottie-block">
                 <LottieRemote url={lottieBlock.src} />
@@ -149,156 +136,124 @@ function ContentArea({
           </BibliographyGrid>
         )}
 
+        {/* ---- Resto de bloques ---- */}
         {theme.id !== 'bib' &&
           theme.content.map((block, idx) => {
+            const key = `${block.type}-${idx}`;
+
             switch (block.type) {
-            /* ----- texto en Markdown ----- */
-            case 'paragraph':
-              return (
-                <Paragraph
-                  key={idx}
-                  dangerouslySetInnerHTML={{ __html: marked.parse(block.text) }}
-                />
-              );
+              case 'paragraph':
+                return (
+                  <Paragraph key={key} className="sr-item"
+                    dangerouslySetInnerHTML={{ __html: marked.parse(block.text) }} />
+                );
 
-            /* ----- imagen ----- */
-            case 'image':
-              return (
-                <Figure key={idx}>
-                  <img src={block.src} alt={block.alt || ''} />
-                  {block.caption && <figcaption>{block.caption}</figcaption>}
-                </Figure>
-              );
+              case 'image':
+                return (
+                  <Figure key={key} className="sr-item">
+                    <img src={block.src} alt={block.alt || ''} />
+                    {block.caption && <figcaption>{block.caption}</figcaption>}
+                  </Figure>
+                );
 
-            /* ----- video ----- */
-            case 'video':
-              return (
-                <VideoBox key={idx}>
-                  {block.title && <h3>{block.title}</h3>}
-                  <iframe
-                    src={block.src.replace('watch?v=', 'embed/')}
-                    title={block.title || 'video'}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  {block.caption && <p>{block.caption}</p>}
-                </VideoBox>
-              );
-
-            /* ----- cita ----- */
-            case 'blockquote':
-              return <BlockQuote key={idx}>{block.text}</BlockQuote>;
-
-            /* ----- lista ----- */
-            case 'list':
-              const ListTag = block.style === 'ordered' ? Ordered : Unordered;
-              return (
-                <ListTag key={idx}>
-                  {block.items.map((it, i) => (
-                    <li
-                      key={i}
-                      dangerouslySetInnerHTML={{
-                        __html: marked.parseInline(it),
-                      }}
+              case 'video':
+                return (
+                  <VideoBox key={key} className="sr-item">
+                    {block.title && <h3>{block.title}</h3>}
+                    <iframe
+                      src={block.src.replace('watch?v=', 'embed/')}
+                      title={block.title || 'video'}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
                     />
-                  ))}
-                </ListTag>
-              );
+                    {block.caption && <p>{block.caption}</p>}
+                  </VideoBox>
+                );
 
-            /* ----- enlace simple ----- */
-            case 'link':
-              return (
-                <LinkBox key={idx}>
-                  <a href={block.url} target="_blank" rel="noopener noreferrer">
-                    {block.text || block.url}
-                  </a>
-                </LinkBox>
-              );
+              case 'blockquote':
+                return <BlockQuote key={key} className="sr-item">{block.text}</BlockQuote>;
 
-            /* ----- acordeón ----- */
-            case 'accordion': {
-              const isOpen = accordionOpen[idx] ?? false;
-              return (
-                <Accordion key={idx}>
-                  <AccordionHeader
-                    onClick={() =>
+              case 'list': {
+                const ListTag = block.style === 'ordered' ? Ordered : Unordered;
+                return (
+                  <ListTag key={key} className="sr-item">
+                    {block.items.map((it, i) => (
+                      <li key={i} dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }} />
+                    ))}
+                  </ListTag>
+                );
+              }
+
+              case 'link':
+                return (
+                  <LinkBox key={key} className="sr-item">
+                    <a href={block.url} target="_blank" rel="noopener noreferrer">
+                      {block.text || block.url}
+                    </a>
+                  </LinkBox>
+                );
+
+              case 'accordion': {
+                const isOpen = accordionOpen[idx] ?? false;
+                return (
+                  <Accordion key={key} className="sr-item">
+                    <AccordionHeader onClick={() =>
                       setAccordionOpen((prev) => ({ ...prev, [idx]: !isOpen }))
-                    }
-                  >
-                    {block.header}
-                    <span>{isOpen ? '−' : '+'}</span>
-                  </AccordionHeader>
+                    }>
+                      {block.header}
+                      <span>{isOpen ? '−' : '+'}</span>
+                    </AccordionHeader>
 
-                  {isOpen && (
-                    <AccordionContent
-                      dangerouslySetInnerHTML={{
-                        __html: marked.parse(block.text),
-                      }}
-                    />
-                  )}
-                </Accordion>
-              );
-            }
-
-            /* ----- animación Lottie ----- */
-            case 'lottie':
-              return (
-                <LottieBox key={idx}>
-                  {/* Ahora LottieRemote ocupa 100 % por defecto */}
-                  <LottieRemote url={block.src} />
-                </LottieBox>
-              );
-
-            /* ---------- botón de descarga (uno o varios archivos) ---------- */
-            case 'download': {
-              const { text, href, files = [], icon } = block;
-              const list = href ? [href] : files; // normaliza a array
-
-              const handleDownload = () => {
-                list.forEach((url) => {
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = url.split('/').pop(); // nombre base
-                  document.body.appendChild(a);
-                  a.click();
-                  document.body.removeChild(a);
-                });
-              };
-
-              return (
-                <DownloadWrapper key={idx}>
-                  <DownloadBtn onClick={handleDownload}>
-                    {icon && (
-                      <Player
-                        autoplay
-                        loop
-                        src={icon}
-                        className="lottie-icon"
+                    {isOpen && (
+                      <AccordionContent
+                        dangerouslySetInnerHTML={{ __html: marked.parse(block.text) }}
                       />
                     )}
-                    {text || 'Descargar'}
-                  </DownloadBtn>
-                </DownloadWrapper>
-              );
+                  </Accordion>
+                );
+              }
+
+              case 'lottie':
+                return (
+                  <LottieBox key={key} className="sr-item">
+                    <LottieRemote url={block.src} />
+                  </LottieBox>
+                );
+
+              case 'download': {
+                const { text, href, files = [], icon } = block;
+                const list = href ? [href] : files;
+
+                const handleDownload = () => {
+                  list.forEach((url) => {
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = url.split('/').pop();
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                  });
+                };
+
+                return (
+                  <DownloadWrapper key={key} className="sr-item">
+                    <DownloadBtn onClick={handleDownload}>
+                      {icon && <Player autoplay loop src={icon} className="lottie-icon" />}
+                      {text || 'Descargar'}
+                    </DownloadBtn>
+                  </DownloadWrapper>
+                );
+              }
+
+              default:
+                return null;
             }
+          })}
 
-            default:
-              return null;
-          }
-        })}
-
-        {/* ---------- navegación entre temas ---------- */}
+        {/* ---- navegación inferior ---- */}
         <NavButtons>
-          <NavButton onClick={() => onNavigateTheme('prev')} disabled={!hasPrev}>
-            ← Tema Anterior
-          </NavButton>
-          <NavButton
-            $next
-            onClick={() => onNavigateTheme('next')}
-            disabled={!hasNext}
-          >
-            Tema Siguiente →
-          </NavButton>
+          <NavButton onClick={() => onNavigateTheme('prev')} disabled={!hasPrev}>← Tema Anterior</NavButton>
+          <NavButton $next onClick={() => onNavigateTheme('next')} disabled={!hasNext}>Tema Siguiente →</NavButton>
         </NavButtons>
       </div>
     </ContentWrapper>
