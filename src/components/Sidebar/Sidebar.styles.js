@@ -72,7 +72,7 @@ export const SidebarWrapper = styled.aside`
     height: 100%;
     padding: 53px 20px;
     overflow-y: auto;
-    background: ${({ theme }) => theme.colors.primaryExtraSoft};
+    background: ${({ theme }) => theme.colors.sidebarBackground};
     transition: transform .3s ease;
     transform: ${({ $collapsed }) =>
       $collapsed ? 'translateX(-100%)' : 'translateX(0)'};

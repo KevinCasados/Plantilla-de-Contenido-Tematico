@@ -18,6 +18,7 @@ export const lightTheme = {
 
     /* --- secundarios (si los necesitas) --- */
     secondary: '#ff0059',
+    sidebarBackground: '#e3f2fd',
 
     /* --- enlaces --- */
     link:       '#0059ff',
@@ -61,6 +62,7 @@ export const darkTheme = {
     primaryExtraSoft: '#2d3d6b',
 
     secondary: '#ff4d8d',
+    sidebarBackground: '#000000',
 
     /* --- enlaces --- */
     link:       '#4d8dff',
