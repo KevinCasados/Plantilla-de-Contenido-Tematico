@@ -19,6 +19,8 @@ export const lightTheme = {
     /* --- secundarios (si los necesitas) --- */
     secondary: '#ff0059',
     sidebarBackground: '#e3f2fd',
+    accordionTicket: '#0d47a1',
+    accordionBackground: '#e3f2fd',
 
     /* --- enlaces --- */
     link:       '#0059ff',
@@ -63,6 +65,8 @@ export const darkTheme = {
 
     secondary: '#ff4d8d',
     sidebarBackground: '#000000',
+    accordionTicket: '#4d8dff',
+    accordionBackground: '#062a61',
 
     /* --- enlaces --- */
     link:       '#4d8dff',
