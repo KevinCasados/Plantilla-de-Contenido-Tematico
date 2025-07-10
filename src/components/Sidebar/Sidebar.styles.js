@@ -143,7 +143,7 @@ export const SubthemesList = styled.ul`
 `;
 export const SubthemeItem = styled.div`
   ${itemBase};font-size:.9em;
-  background:${({theme})=>theme.colors.primaryExtraSoft};
+  background:${({theme})=>theme.colors.sidebarBackground};
 
   &:hover{
     background:${({theme})=>theme.colors.primarySoft};
