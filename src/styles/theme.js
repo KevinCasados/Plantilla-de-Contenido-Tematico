@@ -73,7 +73,7 @@ export const darkTheme = {
     linkHover:  '#86b2ff',
 
     /* --- éxito --- */
-    successLight: '#1e2b1e',
+    successLight: '#212121',
     successSoft:  '#2e7d32',
     success:      '#4caf50',
     successDark:  '#81c784',

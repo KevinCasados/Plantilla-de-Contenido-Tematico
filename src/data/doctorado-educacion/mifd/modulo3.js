@@ -544,7 +544,7 @@ competencies : [
       {
         type: 'paragraph',
         text:
-          'Aquí aparecerán enlaces a PDFs, videos y sitios externos que amplían lo visto '
+          'Aquí encontrarás un PDF con videos y sitios externos que amplían lo visto '
           + 'en el módulo.'
       },
 
