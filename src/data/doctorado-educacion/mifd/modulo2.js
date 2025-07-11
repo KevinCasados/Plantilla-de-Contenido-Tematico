@@ -179,7 +179,7 @@ de la práctica educativa.',
           {
             type: 'video',
             title: 'Comparativa de modelos de formación docente',
-            src: 'https://www.youtube.com/watch?v=lj0vEKD5n-o',
+            src: 'https://www.youtube.com/watch?v=wgoUfUqB1_s',
             caption: '8 min · Síntesis visual de los seis modelos, con ejemplos de aula.',
           },
         ],
@@ -760,7 +760,7 @@ de la práctica educativa.',
       {
         type: 'paragraph',
         text:
-          'Aquí aparecerán enlaces a PDFs, videos y sitios externos que amplían lo visto '
+          'Aquí encontrarás un PDF con videos y sitios externos que amplían lo visto '
           + 'en el módulo.'
       },
 
