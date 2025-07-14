@@ -554,15 +554,28 @@ competencies : [
           src  : 'https://lottie.host/c0d4b22d-190c-499c-ae7c-fbdc65bdec18/uwM2ByDoCU.lottie',
         },
         
-      {
-        type : 'download',
-        text : 'Descargar guías PDF',
-        files: [
-            `${base}/MaterialComplementario-Modulo3.pdf`,
-            `${base}/MaterialComplementario-Modulo3-2aparte.pdf`
-        ],
-        icon : 'https://lottie.host/03d343e5-0ec1-42a0-a414-9fc13133b936/DH3U5C7VP7.json'
-      }
+            /* ② Botón que abre el vídeo complementario */
+    {
+      type        : 'download',              // reutilizamos el mismo bloque
+      text        : 'Ver video complementario 1',
+      href        : 'https://www.youtube.com/watch?v=6XSt1ZVSX50', // vídeo hallado en el PDF
+      openInNewTab: true,                    // ← abre en pestaña nueva
+      icon        : 'https://lottie.host/64720b92-74e2-49a6-8137-a43976b8cba3/oEkht7b3Pb.json'
+    },
+
+    /* ③ Lista de bibliografía específica de este material */
+    {
+      type : 'list',
+      style: 'unordered',
+      items: [
+        'Gallegos Nava, R. (1999). *Pedagogía del amor universal. Educación holista.* México: Editorial Pax.',
+        'El mapa conceptual. Centro de Capacitación en Educación a Distancia. Disponible en: https://www.uned.ac.cr/academica/images/ceced/docs/Estaticos/Estrategia_Mapa_conceptual.pdf',
+        'Martínez, M. M. (2011). Paradigmas emergentes y ciencias de la complejidad. *Opción, 27*(65). Disponible en: https://www.redalyc.org/pdf/310/31021901003.pdf',
+        'Maturana, H. (2001). *Emociones y lenguaje en educación y política.* Santiago de Chile: Dolmen. Disponible en: http://turismotactico.org/proyecto_pologaraia/wp-content/uploads/2008/01/emociones.pdf',
+        'Morín, E. (2001). *Los siete saberes necesarios para la educación del futuro.* Librería Correo de la UNESCO, México. Disponible en: https://www.ideassonline.org/public/pdf/LosSieteSaberesNecesariosParaLaEdudelFuturo.pdf',
+        'Tríptico. Disponible en: https://www.uanl.mx/utilerias/chip/descarga/triptico.pdf'
+        ]
+    },
     ]
   },
 

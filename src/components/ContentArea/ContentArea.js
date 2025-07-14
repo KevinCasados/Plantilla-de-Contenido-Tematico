@@ -9,7 +9,7 @@ import {
   Figure, BlockQuote, Ordered, Unordered, LinkBox, VideoBox,
   LottieBox, DownloadBtn, DownloadWrapper,
   BibliographyGrid, Accordion, AccordionHeader, AccordionContent,
-  NavButtons, NavButton, UnitInfoBox,
+  NavButtons, NavButton, UnitInfoBox, ReadingBox,
 } from './ContentArea.styles';
 
 function ContentArea({
@@ -178,16 +178,36 @@ useEffect(() => {
             case 'blockquote':
               return <BlockQuote key={key} className="sr-item">{block.text}</BlockQuote>;
 
-            case 'list': {
-              const ListTag = block.style === 'ordered' ? Ordered : Unordered;
-              return (
-                <ListTag key={key} className="sr-item">
-                  {block.items.map((it, i) => (
-                    <li key={i} dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }} />
-                  ))}
-                </ListTag>
-              );
-            }
+            /* ─ LISTA: si estamos en Material Complementario (“cc”)
+                  la envolvemos en ReadingBox con encabezado ─ */
+             case 'list': {
+               const ListTag = block.style === 'ordered' ? Ordered : Unordered;
+  
+               /* 1.  Bloque “cc” → caja destacada  */
+               if (theme.id === 'cc') {
+                 return (
+                   <ReadingBox key={key} className="sr-item">
+                     <h3>Documentos de lectura</h3>
+                     <ListTag>
+                       {block.items.map((it, i) => (
+                         <li key={i}
+                             dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }} />
+                       ))}
+                     </ListTag>
+                   </ReadingBox>
+                 );
+               }
+ 
+               /* 2.  Cualquier otro tema → lista normal */
+               return (
+                 <ListTag key={key} className="sr-item">
+                   {block.items.map((it, i) => (
+                     <li key={i}
+                         dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }} />
+                   ))}
+                 </ListTag>
+               );
+             }
 
             case 'link':
               return (
@@ -225,9 +245,15 @@ useEffect(() => {
               );
 
             case 'download': {
-              const { text, href, files = [], icon } = block;
+              const { text, href, files = [], icon, openInNewTab } = block;
               const list = href ? [href] : files;
-              const handleDownload = () =>
+           
+              const handleClick = () => {
+                if (openInNewTab && list.length) {
+                  window.open(list[0], '_blank', 'noopener,noreferrer');
+                  return;
+                }
+                /* descarga “clásica” ------------------------------------------------ */
                 list.forEach((url) => {
                   const a = document.createElement('a');
                   a.href = url;
@@ -236,10 +262,11 @@ useEffect(() => {
                   a.click();
                   document.body.removeChild(a);
                 });
+              };
 
               return (
                 <DownloadWrapper key={key} className="sr-item">
-                  <DownloadBtn onClick={handleDownload}>
+                  <DownloadBtn onClick={handleClick}>
                     {icon && <Player autoplay loop src={icon} className="lottie-icon" />}
                     {text || 'Descargar'}
                   </DownloadBtn>
