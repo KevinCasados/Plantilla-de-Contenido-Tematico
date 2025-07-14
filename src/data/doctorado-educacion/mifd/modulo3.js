@@ -557,7 +557,7 @@ competencies : [
             /* ② Botón que abre el vídeo complementario */
     {
       type        : 'download',              // reutilizamos el mismo bloque
-      text        : 'Ver video complementario 1',
+      text        : 'Ver video complementario',
       href        : 'https://www.youtube.com/watch?v=6XSt1ZVSX50', // vídeo hallado en el PDF
       openInNewTab: true,                    // ← abre en pestaña nueva
       icon        : 'https://lottie.host/64720b92-74e2-49a6-8137-a43976b8cba3/oEkht7b3Pb.json'
