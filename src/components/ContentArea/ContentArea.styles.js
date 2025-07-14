@@ -272,8 +272,8 @@ export const DownloadBtn = styled.a`
   }
 
   .lottie-icon{
-    width: 2.66em;  /* 5 % menos que 2.8 em */
-    height: 2.66em;
+    width: 3.66em;  /* 5 % menos que 2.8 em */
+    height: 3.66em;
     flex-shrink: 0;
   }
 `;
@@ -328,4 +328,34 @@ export const BibliographyGrid = styled.div`
     word-break: break-word;  /* permite cortar palabros y URLs   */
   }
 }
+`;
+
+/* ——— ReadingBox: lista destacada para Material Complementario ——— */
+export const ReadingBox = styled.div`
+  ${card};
+  padding: 45px 22px;
+  margin: 65px auto;
+  max-width: 1080px;
+
+  h3 {
+    margin-top: 0;
+    font-size: 2.05rem;
+    color: ${({ theme }) => theme.colors.titles};
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.primarySoft};
+    padding-bottom: 6px;
+  }
+
+  ul {
+    margin: 18px 0 0 1.1rem;
+    list-style: disc;
+    font-size: 1.1rem;
+  }
+  li { margin: .45rem 0; }
+  a {
+    color: ${({ theme }) => theme.colors.link};
+    &:hover { text-decoration: underline; }
+  }
 `;

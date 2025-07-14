@@ -492,14 +492,27 @@ export default {
           src  : 'https://lottie.host/c0d4b22d-190c-499c-ae7c-fbdc65bdec18/uwM2ByDoCU.lottie',
         },
         
-      {
-        type : 'download',
-        text : 'Descargar guías PDF',
-        files: [
-            `${base}/MaterialComplementario-Modulo1.pdf`,
-        ],
-        icon : 'https://lottie.host/03d343e5-0ec1-42a0-a414-9fc13133b936/DH3U5C7VP7.json'
-      }
+      /* ② Botón que abre el vídeo complementario */
+    {
+      type        : 'download',              // reutilizamos el mismo bloque
+      text        : 'Ver video complementario',
+      href        : 'https://www.youtube.com/watch?v=E1iU30_0kGs', // vídeo hallado en el PDF
+      openInNewTab: true,                    // ← abre en pestaña nueva
+      icon        : 'https://lottie.host/64720b92-74e2-49a6-8137-a43976b8cba3/oEkht7b3Pb.json'
+    },
+
+    /* ③ Lista de bibliografía específica de este material */
+    {
+      type : 'list',
+      style: 'unordered',
+      items: [
+        'Capra, Fritjof (1998). El punto crucial. Ciencia, sociedad y cultura naciente. Editorial Buenos Aires, Argentina. en: https://docs.google.com/file/d/0ByRMadzMwWYHMzBoX2JocThGQU0/view?resourcekey=0--kUINoHrlTptF00O6X8rVQ',
+        'La infografía. Disponible en: https://es.venngage.com/blog/como-hacer-una-infografia/',
+        'Pérez Gómez A. (2008). Comprender y transformar la enseñanza.  La función y formación del profesor/a, en la enseñanza para la comprensión. Diferentes Perspectivas; Edit. Morata. Madrid. Disponible en: https://ariselaortega.files.wordpress.com/2013/11/2-comprender-y-transformarla-ensec3b1anza-sacristc3a1n.pdf',
+        'Ruiz, B. Carmen (2001). Tesis Doctoral: Evaluación de programas de formación de formadores. La formación de formadores: paradigmas y modelos de Universidad de Barcelona. en:  https://www.tdx.cat/bitstream/handle/10803/5003/crb03de12.pdf?sequence=3&isAllowed=y',
+        //  Añade aquí las referencias reales extraídas del PDF
+      ]
+    },
     ]
   },
 

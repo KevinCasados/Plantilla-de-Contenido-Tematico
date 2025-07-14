@@ -715,14 +715,27 @@ competencies : [
           src  : 'https://lottie.host/c0d4b22d-190c-499c-ae7c-fbdc65bdec18/uwM2ByDoCU.lottie',
         },
         
-      {
-        type : 'download',
-        text : 'Descargar guías PDF',
-        files: [
-            `${base}/MaterialComplementario-Modulo4.pdf`,
-        ],
-        icon : 'https://lottie.host/03d343e5-0ec1-42a0-a414-9fc13133b936/DH3U5C7VP7.json'
-      }
+            /* ② Botón que abre el vídeo complementario */
+    {
+      type        : 'download',              // reutilizamos el mismo bloque
+      text        : 'Ver video complementario',
+      href        : 'https://www.youtube.com/watch?v=OaNXCrjNyck', // vídeo hallado en el PDF
+      openInNewTab: true,                    // ← abre en pestaña nueva
+      icon        : 'https://lottie.host/64720b92-74e2-49a6-8137-a43976b8cba3/oEkht7b3Pb.json'
+    },
+
+    /* ③ Lista de bibliografía específica de este material */
+    {
+      type : 'list',
+      style: 'unordered',
+      items: [
+        'Assmann, Hugo (2002). *Placer y ternura en la educación. Hacia una sociedad aprendiente.* Barcelona: Narcea Ediciones. Disponible en: https://www.revistasinrecreo.com/wp-content/uploads/2015/11/Hugo-Assman-Placer-y-ternura.pdf',
+        'Boletín informativo. ¿Qué es y cómo se hace? Disponible en: https://www.lifeder.com/caracteristicas-boletin-informativo/',
+        'Calvo Muñoz, Carlos (2013). *Del mapa escolar al territorio educativo. Disoñando la escuela desde la educación.* Universidad de la Serena, Quinta Edición, La Serena, Chile. Disponible en: https://es.scribd.com/doc/292567549/Del-mapa-escolar-al-territorio-educativo-Disonando-la-escuela-desde-la-educacion-Carlos-Calvo-Munoz',
+        'Canal Martínez, M., Del Callejo, D., Hernández, A. R., Ochoa, C. O., Peredo, C. B. y Velasco, T. J. (2011). *La educación relacional: Hacia un nuevo paradigma educativo.* Xalapa, México: Arana Editores. Disponible en: https://www.uv.mx/iieses/files/2013/05/04_Educacion_relacional_2.pdf',
+        'Gutiérrez, Francisco (1994). *La mediación pedagógica para la educación.* RNTC, San José (Costa Rica). Disponible en: https://abacoenred.org/wp-content/uploads/2020/02/LA-MEDIACION-PEDAGOGICA.pdf'
+        ]
+    },
     ]
   },
 
