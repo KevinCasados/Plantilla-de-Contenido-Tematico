@@ -14,6 +14,12 @@ import {
   ExpandIcon,
 } from './Sidebar.styles';
 
+/* ──────────────────────────────────────────────────────────
+   • El componente se re‑escribe recursivamente con
+     renderItem() para manejar n niveles de anidamiento.
+   • expandedThemes (objeto { id:true/false }) controla
+     qué nodos están abiertos.
+   ────────────────────────────────────────────────────────── */
 function Sidebar({
   themes,
   currentThemeId,
@@ -23,13 +29,55 @@ function Sidebar({
   collapsed,
   onToggle,
 }) {
-  /* ── Abrir / cerrar sub-temas ── */
+  /* Abre / cierra un nodo (tema o sub‑tema) */
   const toggleExpand = (id) =>
     setExpandedThemes((p) => ({ ...p, [id]: !p[id] }));
 
-  /* ── Tema o sub-tema activo ── */
-  const isActive = (t) =>
-    t.id === currentThemeId || t.subthemes?.some((s) => s.id === currentThemeId);
+  /* Devuelve true si el nodo t o cualquiera de sus hijos está activo */
+  const nodeIsActive = (t) =>
+    t.id === currentThemeId ||
+    t.subthemes?.some((s) => nodeIsActive(s));
+
+  /* ── Render recursivo ─────────────────────────────────── */
+  const renderItem = (node, depth = 0) => {
+    const { id, numbering = '', title, subthemes } = node;
+    const hasChildren = Array.isArray(subthemes) && subthemes.length > 0;
+
+    const label =
+      node.isUnitInfo
+        ? title
+        : numbering === title || numbering === '' /* evita duplicar */
+        ? title
+        : `${numbering} ${title}`;
+
+    /* Decide qué styled‑component usar: ThemeItem (nivel 0) o SubthemeItem (>0) */
+    const ItemComponent = depth === 0 ? ThemeItem : SubthemeItem;
+
+    return (
+      <li key={id}>
+        <ItemComponent
+          $active={nodeIsActive(node)}
+          onClick={() => {
+            if (hasChildren) toggleExpand(id);
+            onThemeSelect(id);
+          }}
+        >
+          <span>{label}</span>
+
+          {hasChildren && (
+            <ExpandIcon>{expandedThemes[id] ? '▼' : '►'}</ExpandIcon>
+          )}
+        </ItemComponent>
+
+        {hasChildren && expandedThemes[id] && (
+          <SubthemesList>
+            {subthemes.map((child) => renderItem(child, depth + 1))}
+          </SubthemesList>
+        )}
+      </li>
+    );
+  };
+  /* ─────────────────────────────────────────────────────── */
 
   return (
     <SidebarWrapper $collapsed={collapsed}>
@@ -46,48 +94,7 @@ function Sidebar({
 
         <nav>
           <List>
-            {themes.map((t) => {
-              /* —— etiqueta que se mostrará —— */
-              const label = t.isUnitInfo
-                ? t.title
-                : t.numbering === t.title
-                ? t.title                      // evita duplicado
-                : `${t.numbering} ${t.title}`;
-
-              return (
-                <li key={t.id}>
-                  <ThemeItem
-                    $active={isActive(t)}
-                    onClick={() => {
-                      if (t.subthemes?.length) toggleExpand(t.id);
-                      onThemeSelect(t.id);
-                    }}
-                  >
-                    <span>{label}</span>
-
-                    {t.subthemes?.length > 0 && (
-                      <ExpandIcon>{expandedThemes[t.id] ? '▼' : '►'}</ExpandIcon>
-                    )}
-                  </ThemeItem>
-
-                  {/* sub-niveles */}
-                  {t.subthemes?.length > 0 && expandedThemes[t.id] && (
-                    <SubthemesList>
-                      {t.subthemes.map((s) => (
-                        <li key={s.id}>
-                          <SubthemeItem
-                            $active={s.id === currentThemeId}
-                            onClick={() => onThemeSelect(s.id)}
-                          >
-                            {s.numbering} {s.title}
-                          </SubthemeItem>
-                        </li>
-                      ))}
-                    </SubthemesList>
-                  )}
-                </li>
-              );
-            })}
+            {themes.map((t) => renderItem(t))}
           </List>
         </nav>
       </div>
