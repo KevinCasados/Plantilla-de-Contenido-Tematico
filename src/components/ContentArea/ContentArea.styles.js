@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 /* ——— helper para “tarjetas” ——— */
 const card = css`
@@ -21,24 +21,24 @@ export const ContentWrapper = styled.main`
   /* ───── Barra reservada (6 px) ───── */
   /* Chrome, Safari, Edge, Opera */
   &::-webkit-scrollbar {
-    width: 6px;                 /* ancho fijo → no hay “brinco”          */
-    background: transparent;    /* pista invisible                       */
+    width: 6px; /* ancho fijo → no hay “brinco”          */
+    background: transparent; /* pista invisible                       */
   }
   &::-webkit-scrollbar-thumb {
-    background: transparent;    /* pulgar también transparente           */
+    background: transparent; /* pulgar también transparente           */
     border-radius: 3px;
   }
 
   /* Firefox */
-  scrollbar-width: thin;                       /* ~6 px */
-  scrollbar-color: transparent transparent;    /* pista + pulgar invisibles */
+  scrollbar-width: thin; /* ~6 px */
+  scrollbar-color: transparent transparent; /* pista + pulgar invisibles */
 
   /* ───── Al pasar el puntero: solo se colorea el pulgar ───── */
   &:hover::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.25);           /* color sutil               */
+    background: rgba(0, 0, 0, 0.25); /* color sutil               */
   }
   &:hover::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.06);           /* pista tenue (opcional)    */
+    background: rgba(0, 0, 0, 0.06); /* pista tenue (opcional)    */
   }
   &:hover {
     scrollbar-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.06); /* Firefox    */
@@ -105,8 +105,8 @@ export const Figure = styled.figure`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   > figcaption {
-    margin-top: .5rem;
-    font-size: .9em;
+    margin-top: 0.5rem;
+    font-size: 0.9em;
     color: ${({ theme }) => theme.colors.mutedText};
   }
 `;
@@ -122,12 +122,16 @@ export const BlockQuote = styled.blockquote`
 export const Unordered = styled.ul`
   margin: 1rem 0 1rem 1.2rem;
   list-style: disc;
-  li { margin: .4rem 0; }
+  li {
+    margin: 0.4rem 0;
+  }
 `;
 export const Ordered = styled.ol`
   margin: 1rem 0 1rem 1.2rem;
   list-style: decimal;
-  li { margin: .4rem 0; }
+  li {
+    margin: 0.4rem 0;
+  }
 `;
 
 /* ——— enlaces y video ——— */
@@ -173,7 +177,9 @@ export const AccordionHeader = styled.button`
   justify-content: space-between;
   cursor: pointer;
   transition: background 0.25s;
-  &:hover { background: ${({ theme }) => theme.colors.primarySoft}; }
+  &:hover {
+    background: ${({ theme }) => theme.colors.primarySoft};
+  }
 `;
 export const AccordionContent = styled.div`
   padding: 15px 20px;
@@ -215,19 +221,56 @@ export const UnitInfoBox = styled.section`
   background: ${({ theme }) => theme.colors.successLight};
   margin-bottom: 25px;
   padding: 25px;
-  .unit-title   { text-align:center;font-size:2.2em;margin:10px 0;color:${({theme})=>theme.colors.titles}; }
-  .unit-subtitle{ text-align:center;font-size:1.6em;margin-bottom:25px;color:${({theme})=>theme.colors.success}; }
-  .unit-meta    { font-size:1.05em;margin-bottom:8px; }
-  .section-heading{ font-size:1.35em;margin:25px 0 12px;color:${({theme})=>theme.colors.success}; }
-  .objective{ ${card};border-left:5px solid ${({ theme }) => theme.colors.success};margin-bottom:20px;padding:15px; }
-  .competencies{ list-style:none;padding:0;
-    li{ ${card};border-left:4px solid ${({ theme }) => theme.colors.successSoft};margin-bottom:10px;padding:12px; } }
+  .unit-title {
+    text-align: center;
+    font-size: 2.2em;
+    margin: 10px 0;
+    color: ${({ theme }) => theme.colors.titles};
+  }
+  .unit-subtitle {
+    text-align: center;
+    font-size: 1.6em;
+    margin-bottom: 25px;
+    color: ${({ theme }) => theme.colors.success};
+  }
+  .unit-meta {
+    font-size: 1.05em;
+    margin-bottom: 8px;
+  }
+
+  .unit-meta-teacher {
+    font-size: 1.05em;
+    margin-bottom: 8px;
+    display: none;
+  }
+
+  .section-heading {
+    font-size: 1.35em;
+    margin: 25px 0 12px;
+    color: ${({ theme }) => theme.colors.success};
+  }
+  .objective {
+    ${card};
+    border-left: 5px solid ${({ theme }) => theme.colors.success};
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+  .competencies {
+    list-style: none;
+    padding: 0;
+    li {
+      ${card};
+      border-left: 4px solid ${({ theme }) => theme.colors.successSoft};
+      margin-bottom: 10px;
+      padding: 12px;
+    }
+  }
 `;
 
 /* ——— animación Lottie (centrada y responsiva) ——— */
 export const LottieBox = styled.div`
   width: 75%;
-  max-width: none;       /* ancho máximo opcional */
+  max-width: none; /* ancho máximo opcional */
   margin: 10px auto;
   margin-bottom: 40px;
   display: flex;
@@ -236,12 +279,12 @@ export const LottieBox = styled.div`
   /* el <canvas> o <svg> que pinta la animación */
   canvas,
   svg {
-    width: 100% !important;   /* se adapta al 100 % del contenedor */
-   height: auto !important;  /* mantiene proporción */
+    width: 100% !important; /* se adapta al 100 % del contenedor */
+    height: auto !important; /* mantiene proporción */
   }
 
   @media (max-width: 1100px) {
-  width: 100%;
+    width: 100%;
   }
 `;
 
@@ -264,15 +307,15 @@ export const DownloadBtn = styled.a`
   text-decoration: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background .25s, transform .2s;
+  transition: background 0.25s, transform 0.2s;
 
   &:hover {
     background: ${({ theme }) => theme.colors.primaryDark};
     transform: translateY(-2px);
   }
 
-  .lottie-icon{
-    width: 3.66em;  /* 5 % menos que 2.8 em */
+  .lottie-icon {
+    width: 3.66em; /* 5 % menos que 2.8 em */
     height: 3.66em;
     flex-shrink: 0;
   }
@@ -282,20 +325,20 @@ export const DownloadBtn = styled.a`
 export const DownloadWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;   /* separa un poco del elemento anterior */
+  margin-top: 40px; /* separa un poco del elemento anterior */
 `;
 
 /* ——— Bibliography: lista desplazable + animación grande ——— */
 export const BibliographyGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;          /* siempre 1 columna             */
+  grid-template-columns: 1fr; /* siempre 1 columna             */
   row-gap: 48px;
 
   /* LISTA ----------------------------------------------------------- */
   & > .biblio-list {
-  /* sin límite de alto ni scrollbar interno */
+    /* sin límite de alto ni scrollbar interno */
     overflow: visible;
-    padding-right: 0;     /* (opcional) elimina el pequeño margen derecho */
+    padding-right: 0; /* (opcional) elimina el pequeño margen derecho */
   }
 
   /* ANIMACIÓN ------------------------------------------------------- */
@@ -303,31 +346,31 @@ export const BibliographyGrid = styled.div`
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    width: 90%;                        /* deja respirar a los costados  */
-    max-width: 680px;                  /* más ancha → apariencia mayor  */
+    width: 90%; /* deja respirar a los costados  */
+    max-width: 680px; /* más ancha → apariencia mayor  */
   }
 
   /* ------------- Desactivar el alto fijo de la lista en móviles ----------- */
   @media (max-width: 930px) {
     & > .biblio-list {
-      max-height: none;    /* la lista vuelve a crecer libremente  */
-      overflow: visible;   /* se quita su scroll interno           */
+      max-height: none; /* la lista vuelve a crecer libremente  */
+      overflow: visible; /* se quita su scroll interno           */
     }
   }
 
   @media (max-width: 600px) {
-  /* el UL que envuelve los <li> de bibliografía */
-  & > .biblio-list {
-    overflow-x: hidden;      /* nunca barra horizontal interna   */
-    padding-right: 0.5rem;   /* un poco de aire contra el borde  */
-  }
+    /* el UL que envuelve los <li> de bibliografía */
+    & > .biblio-list {
+      overflow-x: hidden; /* nunca barra horizontal interna   */
+      padding-right: 0.5rem; /* un poco de aire contra el borde  */
+    }
 
-  /* cada elemento de la lista y los enlaces interiores */
-  & > .biblio-list li,
-  & > .biblio-list a {
-    word-break: break-word;  /* permite cortar palabros y URLs   */
+    /* cada elemento de la lista y los enlaces interiores */
+    & > .biblio-list li,
+    & > .biblio-list a {
+      word-break: break-word; /* permite cortar palabros y URLs   */
+    }
   }
-}
 `;
 
 /* ——— ReadingBox: lista destacada para Material Complementario ——— */
@@ -353,9 +396,13 @@ export const ReadingBox = styled.div`
     list-style: disc;
     font-size: 1.1rem;
   }
-  li { margin: .45rem 0; }
+  li {
+    margin: 0.45rem 0;
+  }
   a {
     color: ${({ theme }) => theme.colors.link};
-    &:hover { text-decoration: underline; }
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
