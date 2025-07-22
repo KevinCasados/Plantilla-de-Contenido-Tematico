@@ -65,63 +65,72 @@ export default {
       ],
     },
 
-    /* ───────── Material Complementario ───────── */
+    /* -------------- Material Complementario -------------- */
     {
       id: "cc",
       numbering: "Material Complementario",
       title: "Material Complementario",
       content: [
         {
-          type : "paragraph",
-          text :
-            "Aquí encontrarás recursos (PDF, videos, enlaces externos) que amplían lo visto en el módulo.",
+          type: "paragraph",
+          text:
+            "Aquí encontrarás un PDF con videos y sitios externos que amplían lo visto " +
+            "en el módulo.",
         },
 
-        /* Animación decorativa (Lottie) */
+        /* Animación central (usa DotLottieReact en el componente) */
         {
           type: "lottie",
-          src : "TODO‑URL‑animacion‑material.lottie",
+          src: "https://lottie.host/c0d4b22d-190c-499c-ae7c-fbdc65bdec18/uwM2ByDoCU.lottie",
         },
 
-        /* Botón / enlace destacado (puede ser video, PDF, sitio web…) */
+        /* ② Botón que abre el vídeo complementario */
         {
-          type       : "download",
-          text       : "TODO‑Texto del botón",
-          href       : "TODO‑URL‑recurso",
-          openInNewTab: true,
-          icon       : "TODO‑URL‑icono‑lottie.json", // opcional
+          type: "download", // reutilizamos el mismo bloque
+          text: "Ver video complementario",
+          href: "https://www.youtube.com/watch?v=ldhpS8R5ods", // vídeo hallado en el PDF
+          openInNewTab: true, // ← abre en pestaña nueva
+          icon: "https://lottie.host/64720b92-74e2-49a6-8137-a43976b8cba3/oEkht7b3Pb.json",
         },
 
-        /* Lista de recursos complementarios */
+        /* ③ Lista de bibliografía específica de este material */
         {
-          type : "list",
+          type: "list",
           style: "unordered",
           items: [
-            "TODO: recurso 1 – enlace",
-            "TODO: recurso 2 – enlace",
+            "¿Qué es el diseño curricular? ✔ [Concepto, Autores y Antecedentes] https://www.youtube.com/watch?v=ldhpS8R5ods",
+            "Diseño Curricular QUÉ ES y CÓMO se HACE EJEMPLOS https://www.youtube.com/watch?v=3IOkwLKyHNE",
+            "Evaluación Curricular Interna Y Externa || Nitzia Tavarez || https://www.youtube.com/watch?v=OR6YlkxNtps",
+            //  Añade aquí las referencias reales extraídas del PDF
           ],
         },
       ],
     },
 
-    /* ───────────────── Bibliografía ───────────── */
+    /* ---------------------- Bibliografía ------------------- */
     {
       id: "bib",
       numbering: "Bibliografía",
       title: "Bibliografía",
       content: [
         {
-          type : "list",
+          type: "list",
           style: "unordered",
           items: [
-            "TODO: referencia bibliográfica 1",
-            "TODO: referencia bibliográfica 2",
+            "Coll, C. & Solé, I. (2020). *Currículum y evaluación en la educación obligatoria: Desafíos y perspectivas.* Barcelona: Editorial Graó.",
+            "Perrenoud, P. (2019). *La evaluación de los alumnos: De la producción de la excelencia a la regulación de los aprendizajes.* Madrid: Editorial Morata.",
+            "De Alba Ceballos, A. (2018). *Teoría curricular: Nuevas tendencias y perspectivas.* Ciudad de México: Siglo XXI Editores.",
+            "Díaz Barriga, A. (2018). *Metodología de diseño curricular: Un enfoque centrado en competencias.* Ciudad de México: Editorial Trillas.",
+            "Gimeno Sacristán, J. (2017). *El currículum: Una reflexión sobre la práctica.* Madrid: Ediciones Morata.",
+            "Zabalza, M. Á. (2019). *Diseño y desarrollo curricular: Cómo planificar e implementar el currículo en la educación superior.* Madrid: Narcea Ediciones.",
           ],
         },
-        /* Animación opcional al final */
+
+        /* ⬇⬇ NUEVO bloque para la animación ⬇⬇ */
         {
           type: "lottie",
-          src : "TODO‑URL‑animacion‑bibliografia.lottie",
+          src: "https://lottie.host/822f7426-9c06-4a7f-85ad-f9e795d72fd6/09OzrRtAat.json",
+          // pon aquí la animación que quieras
         },
       ],
     },

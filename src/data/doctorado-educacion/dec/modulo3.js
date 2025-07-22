@@ -238,17 +238,150 @@ competencies: [
     id       : "3.3",
     numbering: "3.3",
     title    : "Evaluación",
-    content  : [
-      // contenido pendiente
-    ],
+    content: [
+  /* Párrafo 1 — Finalidad y alcance de la evaluación (≈ 300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "La fase de evaluación es el momento en que el proyecto curricular se mira al espejo: a través de evidencias sistemáticas se determina en qué medida se han alcanzado los objetivos propuestos y cómo ha operado el proceso de enseñanza‑aprendizaje. No se trata únicamente de asignar calificaciones, sino de recopilar información rigurosa y multifuente que permita tomar decisiones fundamentadas para mejorar el currículo. En este sentido, la evaluación asume una doble función: formativa, porque retroalimenta y orienta ajustes mientras el proyecto está vivo, y sumativa, porque valora los resultados al concluir un ciclo o etapa. También cumple un propósito analítico al identificar brechas entre lo planificado y lo ejecutado, revelando la eficacia de las estrategias pedagógicas y la pertinencia de los recursos utilizados. De esta forma, la evaluación se convierte en la bisagra que conecta el diseño con el seguimiento, garantizando que el proyecto no solo produzca aprendizajes significativos, sino que también se perfeccione de manera continua."
+  },
+
+  /* Imagen 1: ciclo de evaluación */
+  {
+    type   : "image",
+    src    : "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1Ov3vQql31X-DUzInkYzAzmRPIQqYdwgeWzdnSPCtm78G9Pf-N1cfK9tvkwbZNhCz6ZskNKueKZKZerBakZrUaNdTDzEoTvXw2C92bteoUVZssWZK2Ph7MJ27ORTXdMckcHU8yjVPwhzF/s640/enfoques_evaluacion1.png",
+    alt    : "Diagrama del ciclo de evaluación dentro del proyecto curricular",
+    caption: "Figura 1. Relación dinámica entre evaluación formativa, sumativa y diagnóstica."
+  },
+
+  /* Párrafo 2 — Diversidad de enfoques de evaluación (≈ 300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "Para abarcar la complejidad del aprendizaje, la evaluación adopta distintos enfoques que se complementan. La diagnóstica permite conocer el punto de partida y reajustar la ruta cuando las condiciones cambian; la formativa acompaña el proceso, entrega retroalimentación oportuna y habilita correcciones in situ; la sumativa otorga una visión de conjunto al finalizar la etapa, facilitando la rendición de cuentas y la toma de decisiones sobre la continuidad o rediseño del proyecto. Cada tipo de evaluación aporta datos específicos: la diagnóstica revela necesidades inmediatas, la formativa detecta avances y dificultades en tiempo real, y la sumativa determina el impacto global. Al integrarlas, el equipo docente dispone de un sistema robusto que ilumina tanto los logros como las áreas susceptibles de mejora, promoviendo una cultura de evidencia y aprendizaje permanente."
+  },
+
+  /* Acordeón 1 — Tipos de evaluación */
+  {
+    type  : "accordion",
+    header: "Tipos de evaluación y sus propósitos",
+    open  : false,
+    text  :
+      "* **Diagnóstica** – Establece el punto de partida y detecta necesidades emergentes.  \n" +
+      "* **Formativa** – Proporciona retroalimentación continua para ajustar el proceso.  \n" +
+      "* **Sumativa** – Valora el logro de objetivos al cierre de la etapa y guía decisiones futuras."
+  },
+
+  /* Párrafo 3 — Instrumentos y técnicas de recolección de datos (≈ 300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "Una evaluación significativa se apoya en una batería diversificada de instrumentos cuantitativos y cualitativos. Las pruebas y exámenes miden la adquisición de conocimientos declarativos; las rúbricas establecen criterios explícitos para tareas complejas, fomentando transparencia y objetividad; los portafolios documentan la progresión del estudiante y capturan productos auténticos; la observación directa permite valorar habilidades socio‑emocionales y actitudes; encuestas y cuestionarios recogen percepciones de estudiantes, docentes y familias, aportando una mirada holística al impacto del proyecto. La triangulación de estas fuentes incrementa la fiabilidad de los hallazgos y ofrece una comprensión profunda del aprendizaje. Además, la tecnología amplía las posibilidades de evaluación mediante plataformas interactivas que generan analíticas en tiempo real, facilitando intervenciones personalizadas y decisiones basadas en datos."
+  },
+
+  /* Imagen 2: herramientas de evaluación */
+  {
+    type   : "image",
+    src    : "https://media.licdn.com/dms/image/v2/D4E22AQGkMG7QsKf3nA/feedshare-shrink_800/feedshare-shrink_800/0/1731254498350?e=2147483647&v=beta&t=s0xvyNfZfbsB_b-Gisyegf6VUyLmY1eLnR7ckAaiOY0",
+    alt    : "Infografía de instrumentos de evaluación formativa y sumativa",
+    caption: "Figura 2. Principales herramientas para una evaluación integral."
+  },
+
+  /* Acordeón 2 — Herramientas de evaluación */
+  {
+    type  : "accordion",
+    header: "Instrumentos recomendados",
+    open  : false,
+    text  :
+      "* **Pruebas y exámenes** – Valoración estandarizada de conocimientos.  \n" +
+      "* **Rúbricas analíticas** – Criterios claros para productos complejos.  \n" +
+      "* **Portafolios** – Evidencias de progreso y reflexión.  \n" +
+      "* **Observación directa** – Registro de desempeño y actitudes.  \n" +
+      "* **Encuestas y cuestionarios** – Percepción de actores sobre efectividad."
+  },
+
+  /* Párrafo 4 — Análisis de resultados y retroalimentación (≈ 300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "Una vez recopilados los datos, el análisis se convierte en el motor de la retroalimentación y la mejora. Interpretar los resultados implica comparar evidencias con los objetivos, identificar patrones de éxito y zonas críticas, y priorizar acciones correctivas. La retroalimentación debe ser específica, oportuna y constructiva: a estudiantes, para orientar su aprendizaje; a docentes, para ajustar estrategias; y a la institución, para tomar decisiones de política curricular. Este diálogo basado en evidencias alimenta el ciclo de mejora continua del proyecto. Asimismo, el análisis permite visibilizar logros, reconocer el esfuerzo de la comunidad educativa y fortalecer la cultura de evaluación como práctica profesional. Cuando la información se utiliza para aprender —y no solo para calificar— la evaluación se convierte en una palanca poderosa de innovación y calidad educativa."
+  }
+],
   },
   {
     id       : "3.4",
     numbering: "3.4",
     title    : "Seguimiento",
-    content  : [
-      // contenido pendiente
-    ],
+    content: [
+  /* Párrafo 1 — Qué es el seguimiento y por qué es crítico (≈300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "El seguimiento es la fase que asegura que un proyecto curricular permanezca vivo, pertinente y sostenible a lo largo del tiempo. A diferencia de la evaluación —que se focaliza en medir resultados en momentos específicos— el seguimiento supone un monitoreo continuo y sistemático del desarrollo del proyecto para verificar que se mantenga alineado con los objetivos educativos y responda a las necesidades emergentes del contexto. Este acompañamiento prolongado permite detectar de manera temprana desviaciones en el rumbo, lagunas en la implementación o desajustes entre lo planeado y lo que ocurre realmente en el aula. Cuando el seguimiento se incorpora como práctica habitual, los hallazgos derivados de la evaluación dejan de quedarse en informes estáticos y se convierten en guía para la acción correctiva. De este modo, los ajustes, mejoras e innovaciones identificados en evaluaciones previas o parciales se incorporan de forma oportuna al proceso educativo, alimentando un ciclo de mejora continua. Además, el seguimiento contribuye a preservar la coherencia del currículo frente a cambios institucionales, rotación de personal o variabilidad en los recursos disponibles. En suma, brinda la visibilidad operativa que permite sostener la calidad del proyecto más allá del entusiasmo inicial y de los hitos formales de evaluación."
+  },
+
+  /* Imagen 1 — Flujo general de seguimiento */
+  {
+    type   : "image",
+    src    : "https://fastercapital.com/es/i-es/Control-de-costos--estrategias-para-el-control-de-costos-neutral-en-efectivo--un-enfoque-de-ganar-ganar--Monitoreo-y-evaluaci-n-continua-para-la-mejora-continua.webp",
+    alt    : "Flujo del seguimiento continuo en un proyecto curricular",
+    caption: "Figura 1. Del monitoreo a la mejora continua."
+  },
+
+  /* Párrafo 2 — Alcances del monitoreo: qué observar y con qué fines (≈300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "Un sistema de seguimiento eficaz observa más que las calificaciones: integra información sobre el desempeño de los estudiantes, la pertinencia de las estrategias pedagógicas, el uso y suficiencia de los recursos, y la satisfacción de los distintos actores educativos. Al monitorear de manera regular estos componentes se puede distinguir si los aprendizajes avanzan al ritmo esperado, si las metodologías mantienen a los estudiantes comprometidos o si existen barreras de infraestructura que afectan la implementación. El seguimiento también funciona como radar de clima institucional: señales de resistencia, sobrecarga docente o baja participación estudiantil emergen antes de convertirse en problemas mayores cuando hay espacios para escuchar y registrar. Este monitoreo múltiple debería apoyarse en registros breves pero sistemáticos (bitácoras docentes, notas de campo, indicadores del LMS, encuestas rápidas) que permitan visualizar tendencias en periodos cortos. Con datos acumulados semana a semana, el equipo puede decidir ajustes finos: reforzar contenidos, redistribuir tiempo, incorporar apoyos tecnológicos o brindar acompañamiento a grupos con rezago. Así, el seguimiento transforma la gestión del currículo en un proceso sensible y responsivo a la realidad educativa diaria."
+  },
+
+  /* Imagen 2 — Panel de indicadores de seguimiento */
+  {
+    type   : "image",
+    src    : "https://www.revista.unam.mx/wp-content/uploads/Figura1..png",
+    alt    : "Panel de indicadores para monitorear un proyecto curricular",
+    caption: "Figura 2. Ejemplo de tablero con métricas clave (participación, avance, recursos)."
+  },
+
+  /* Párrafo 3 — Estrategias y herramientas para un seguimiento sistemático (≈300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "Institucionalizar el seguimiento exige estrategias claras. Un primer paso consiste en definir indicadores de desempeño vinculados a los objetivos del proyecto: participación estudiantil, progreso por competencias, cumplimiento de hitos, y consistencia en la aplicación de estrategias didácticas. Estos indicadores deben recogerse con instrumentos comparables en el tiempo para identificar tendencias. Las reuniones periódicas de seguimiento con el equipo docente son igualmente esenciales: en ellas se comparten evidencias, se contrastan percepciones, se analizan desafíos comunes y se acuerdan ajustes coordinados. La dimensión tecnológica amplifica el alcance del seguimiento: plataformas de gestión del aprendizaje, sistemas de analíticas educativas, aplicaciones de evaluación en línea y formularios automatizados permiten recolectar datos en tiempo real y visualizar alertas tempranas. Cuando los registros digitales se combinan con la observación cualitativa del aula, se obtiene una imagen rica y accionable del estado del proyecto. Documentar cada sesión de revisión asegura trazabilidad: qué se detectó, qué acción se decidió, quién la ejecuta y en qué plazo."
+  },
+
+  /* Acordeón 1 — Estrategias de seguimiento continuo */
+  {
+    type  : "accordion",
+    header: "Estrategias de seguimiento continuo",
+    open  : false,
+    text  :
+      "* Revisión periódica de indicadores de desempeño.  \\n" +
+      "* Reuniones de seguimiento con el equipo docente.  \\n" +
+      "* Uso de plataformas y analíticas digitales para datos en tiempo real.  \\n" +
+      "* Bitácoras y registros de aula para evidencias cualitativas."
+  },
+
+  /* Párrafo 4 — Ajustes, participación y sostenibilidad (≈300 palabras) */
+  {
+    type: "paragraph",
+    text:
+      "El verdadero valor del seguimiento se concreta cuando los datos conducen a decisiones: ajustar metodologías, introducir nuevos recursos, reprogramar actividades o incluso replantear objetivos si cambian las condiciones del contexto. Este enfoque adaptativo previene la obsolescencia del currículo y protege la inversión académica realizada en su diseño. Para que los ajustes sean legítimos y sostenibles deben involucrar a todos los actores educativos: docentes, estudiantes, familias y directivos. Espacios de retroalimentación (encuestas breves, foros, grupos focales) permiten recoger percepciones sobre la pertinencia de las actividades, la carga de trabajo o las barreras de acceso tecnológico. La participación amplia no solo mejora la calidad de la información; también fortalece el sentido de corresponsabilidad y el compromiso con la implementación. Un proyecto que se revisa colectivamente tiende a sostenerse mejor en el tiempo porque las mejoras responden a necesidades compartidas. Convertir los ciclos de seguimiento en práctica institucional —por ejemplo, revisiones bimestrales documentadas— consolida una cultura de mejora continua que mantiene al currículo actualizado, relevante y centrado en los aprendizajes."
+  },
+
+  /* Acordeón 2 — Acciones de ajuste y sostenibilidad */
+  {
+    type  : "accordion",
+    header: "Acciones derivadas del seguimiento",
+    open  : false,
+    text  :
+      "* Ajustar metodologías o secuencias didácticas.  \\n" +
+      "* Incorporar / redistribuir recursos materiales y tecnológicos.  \\n" +
+      "* Modificar actividades o cargas de trabajo según evidencias.  \\n" +
+      "* Reorientar objetivos ante cambios de contexto.  \\n" +
+      "* Involucrar a estudiantes, familias y comunidad en la toma de decisiones."
+  }
+],
   },
 ],
     },
@@ -276,7 +409,7 @@ competencies: [
         {
           type: "download", // reutilizamos el mismo bloque
           text: "Ver video complementario",
-          href: "https://www.youtube.com/watch?v=ldhpS8R5ods", // vídeo hallado en el PDF
+          href: "https://www.youtube.com/watch?v=2-Pf2LA9l_o", // vídeo hallado en el PDF
           openInNewTab: true, // ← abre en pestaña nueva
           icon: "https://lottie.host/64720b92-74e2-49a6-8137-a43976b8cba3/oEkht7b3Pb.json",
         },
@@ -286,9 +419,7 @@ competencies: [
           type: "list",
           style: "unordered",
           items: [
-            "¿Qué es el diseño curricular? ✔ [Concepto, Autores y Antecedentes] https://www.youtube.com/watch?v=ldhpS8R5ods",
-            "Diseño Curricular QUÉ ES y CÓMO se HACE EJEMPLOS https://www.youtube.com/watch?v=3IOkwLKyHNE",
-            "Evaluación Curricular Interna Y Externa || Nitzia Tavarez || https://www.youtube.com/watch?v=OR6YlkxNtps",
+            "Fases del proyecto curricular. https://www.youtube.com/watch?v=MZ17wltJPVs",
             //  Añade aquí las referencias reales extraídas del PDF
           ],
         },
@@ -305,13 +436,13 @@ competencies: [
           type: "list",
           style: "unordered",
           items: [
-            "Coll, C. & Solé, I. (2020). *Currículum y evaluación en la educación obligatoria: Desafíos y perspectivas.* Barcelona: Editorial Graó.",
-            "Perrenoud, P. (2019). *La evaluación de los alumnos: De la producción de la excelencia a la regulación de los aprendizajes.* Madrid: Editorial Morata.",
-            "De Alba Ceballos, A. (2018). *Teoría curricular: Nuevas tendencias y perspectivas.* Ciudad de México: Siglo XXI Editores.",
-            "Díaz Barriga, A. (2018). *Metodología de diseño curricular: Un enfoque centrado en competencias.* Ciudad de México: Editorial Trillas.",
-            "Gimeno Sacristán, J. (2017). *El currículum: Una reflexión sobre la práctica.* Madrid: Ediciones Morata.",
-            "Zabalza, M. Á. (2019). *Diseño y desarrollo curricular: Cómo planificar e implementar el currículo en la educación superior.* Madrid: Narcea Ediciones.",
-          ],
+  "Coll, C. & Solé, I. (2020). *Currículum y evaluación en la educación obligatoria: Desafíos y perspectivas.* Barcelona, España: Editorial Graó.",
+  "Perrenoud, P. (2019). *La evaluación de los alumnos: De la producción de la excelencia a la regulación de los aprendizajes.* Madrid, España: Editorial Morata.",
+  "De Alba Ceballos, A. (2018). *Teoría curricular: Nuevas tendencias y perspectivas.* Ciudad de México: Siglo XXI Editores.",
+  "Díaz Barriga, A. (2018). *Metodología de diseño curricular: Un enfoque centrado en competencias.* Ciudad de México, México: Editorial Trillas.",
+  "Gimeno Sacristán, J. (2017). *El currículum: Una reflexión sobre la práctica.* Madrid, España: Ediciones Morata.",
+  "Zabalza, M. Á. (2019). *Diseño y desarrollo curricular: Cómo planificar e implementar el currículo en la educación superior.* Madrid, España: Narcea Ediciones."
+],
         },
 
         /* ⬇⬇ NUEVO bloque para la animación ⬇⬇ */
