@@ -1,4 +1,4 @@
-/* — PLANTILLA DE MÓDULO (v3) —                    */
+/* — PLANTILLA DE MÓDULO (v5) —                    */
 /* Soporta sub‑temas ilimitados + animaciones Lottie */
 
 const basePath = process.env.PUBLIC_URL + "/assets/MaterialComplementario/TODO‑carpeta";
