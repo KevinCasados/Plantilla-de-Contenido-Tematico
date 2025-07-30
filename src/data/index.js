@@ -3,6 +3,7 @@ import * as mifd from './doctorado-educacion/mifd'; // Modelo Integrador de Form
 import * as dec  from './doctorado-educacion/dec'; // Diseño y Evaluación Curricular
 import * as pddpe  from './doctorado-educacion/pddpe'; // Practica Docente desde la Perspectiva Evaluadora 
 import * as arh  from './maestria-administracion-rh/arh';
+import * as pbcc  from './maestria-psicologia-clinica/pbcc'; // Psicoterapia Breve Conductivo-Conceptual
 
 export const programs = {
   'doctorado-educacion': {
@@ -13,6 +14,11 @@ export const programs = {
   },
   'maestria-administracion-recursos-humanos': {
     arh,             // Administración de Recursos Humanos
+    // otras materias…
+  },
+
+  'maestria-psicologia-clinica': {
+    pbcc,             // Psicoterapia Breve Conductivo-Conceptual
     // otras materias…
   },
   // otros programas…
