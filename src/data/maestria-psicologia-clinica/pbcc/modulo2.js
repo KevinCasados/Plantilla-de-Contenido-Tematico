@@ -372,7 +372,65 @@ cierre terapéutico."
         id: "2.6",
         numbering: "2.6",
         title: "Técnicas de recondicionamiento",
-        content: [{ type: "paragraph", text: "Panorama de técnicas respondientes para reducir ansiedad condicionada. (pendiente)" }],
+        content: [
+    // Párrafo 1 (≈300 palabras)
+    {
+      type: "paragraph",
+      text:
+        "Las técnicas de recondicionamiento se apoyan en principios respondientes para debilitar respuestas de ansiedad que han sido condicionadas a ciertos estímulos (internos o externos) y sustituirlas por respuestas incompatibles. El procedimiento general es claro: primero, psicoeducación funcional para explicar cómo se estableció el vínculo estímulo-ansiedad y por qué se mantiene; segundo, construcción de una jerarquía de situaciones disparadoras graduada por intensidad; tercero, entrenamiento de la respuesta incompatible elegida (p. ej., relajación) y su práctica sistemática; cuarto, exposición ordenada a los ítems de la jerarquía mientras se ejecuta la respuesta inhibidora hasta obtener habituación y/o nuevas asociaciones inhibitorias; y quinto, verificación de progreso y generalización a contextos naturales. En esta lógica, la desensibilización sistemática es un formato paradigmático: el paciente avanza por la jerarquía (imaginada o en vivo) entrenando la respuesta incompatible y registrando descensos en la activación. El principio de inhibición recíproca explica la elección de la respuesta: no se “apaga” la ansiedad por mera voluntad, sino que se establece una conducta que compite fisiológica y conductualmente con ella; de ahí que, cuando la situación lo permite, también puedan emplearse repertorios asertivos o sexuales (según el caso) como respuestas de elección. Técnicamente, el recondicionamiento exige definir con precisión los estímulos que funcionan como EC, medir la RC (intensidad, latencia, evitación) y controlar variables de sesión (duración suficiente, repeticiones, intervalos) para lograr efectos estables. El objetivo no es solo reducir síntomas en consulta, sino consolidar aprendizaje que se mantenga y se traslade a la vida diaria."
+    },
+
+    // Lista 1 — Preparación y dosificación (guía operativa)
+    {
+      type: "list",
+      style: "unordered",
+      items: [
+        "Psicoeducación breve: modelo EC–EI→RC explicado con ejemplos del caso.",
+        "Jerarquía de ansiedad: 10–20 ítems, ordenados por intensidad, con criterios concretos de avance.",
+        "Respuesta incompatible entrenada antes de la exposición (p. ej., relajación, respiración diafragmática).",
+        "Ensayos suficientes por ítem: duración prolongada, sin conductas de seguridad que interrumpan el aprendizaje.",
+        "Registro por sesión: intensidad/latencia de la RC, evitación, recuperación espontánea y notas de generalización."
+      ],
+      text: ""
+    },
+
+    // Párrafo 2 (≈300 palabras)
+    {
+      type: "paragraph",
+      text:
+        "El corazón del recondicionamiento está en el **cómodo control de variables**: se avanza cuando la respuesta de ansiedad disminuye de forma consistente y la persona puede sostener la situación con la respuesta incompatible. En desensibilización sistemática, el entrenamiento en relajación (o técnicas afines) antecede a la exposición y se usa activamente durante los ítems; en aplicaciones más situacionales, la práctica puede ser en vivo, con modelado gradual y coaching atencional. Para construir la jerarquía se parte de situaciones concretas, señales contextuales y sensaciones interoceptivas, asignando puntuaciones (0–100) y describiendo conductas objetivo visibles (qué hará el paciente para permanecer en el ítem). La progresión exige evitar ‘atajos’ que reintroduzcan evitaciones sutiles (mirar al piso, respirar de forma estratégicamente evitativa, uso de distractores internos) pues interfieren con el aprendizaje. En términos de resultados, se monitorea la curva de habituación intra- e inter-sesión, la tasa de evitación y la capacidad de ejecutar la respuesta incompatible bajo demanda. Cuando la situación no permite una acción directa (p. ej., disparadores difusos), la respuesta incompatible de elección suele ser relajación; cuando el disparador es social y la evitación opera en la interacción, respuestas asertivas escaladas funcionan como inhibidoras naturales; y en casos de ansiedad de índole sexual, se planifican repertorios adecuados con práctica entre sesiones. La clave es **ajustar la respuesta inhibidora a la función del estímulo**: la técnica no se impone por rótulo, se selecciona por su capacidad para competir causalmente con la ansiedad en el contexto real del paciente."
+    },
+
+    // Imagen — Apoyo visual
+    {
+      type: "image",
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCjFZ8pXIJaf5kl1HeMBhR_t6iYLYQy3fxcg&s",
+      caption: "Recondicionamiento: jerarquía, respuesta incompatible y exposición graduada.",
+      alt: "Ilustración conceptual de escalera de exposición con práctica de relajación",
+      text: ""
+    },
+
+    // Párrafo 3 (≈300 palabras)
+    {
+      type: "paragraph",
+      text:
+        "Para garantizar mantenimiento y generalización, el plan incorpora variabilidad de estímulos y contextos: cambiar lugares, momentos del día y señales para evitar que el aprendizaje quede ‘atado’ a la consulta. También se prevé la **recuperación espontánea** y la **renovación contextual**, programando ensayos de repaso en ambientes distintos y revisitas breves a ítems superados. Un riesgo común es la convivencia inadvertida de procesos operantes que sostienen la ansiedad (p. ej., reforzamiento negativo de la evitación): por ello, el programa de recondicionamiento suele complementarse con procedimientos operantes (bloques de práctica sin escape, reforzamiento diferencial del afrontamiento) y con análisis de conductas de seguridad (identificarlas y extinguirlas). La evaluación se apoya en indicadores sensibles al cambio: reducción de intensidad/latencia de RC, disminución de evitación, incremento de tiempo de permanencia en ítems y transferencia a metas de vida. En términos de gobierno, cada sesión cierra con retroalimentación y ajuste de dosis (duración, frecuencia, paso siguiente); entre sesiones, el paciente completa tareas con instrucciones claras y criterios de logro. Desde una perspectiva ética, se establecen límites y protocolos de seguridad, especialmente cuando las exposiciones involucran contextos sociales complejos. En síntesis, el recondicionamiento es un **sistema de aprendizaje planificado**: explica, entrena, expone, mide y ajusta para que la ansiedad condicionada pierda control funcional y sea reemplazada por repertorios compatibles con los objetivos clínicos y la vida cotidiana del paciente."
+    },
+
+    // Lista 2 — Errores frecuentes y cómo evitarlos (complemento)
+    {
+      type: "list",
+      style: "ordered",
+      items: [
+        "Avanzar con ansiedad alta: espera descensos consistentes antes de subir en la jerarquía.",
+        "Permitir ‘conductas de seguridad’: identificarlas, registrarlas y retirarlas de forma programada.",
+        "Ensayos cortos o esporádicos: prioriza duración suficiente y práctica entre sesiones.",
+        "Jerarquías vagas: define estímulos, contextos y conductas objetivo con precisión observable.",
+        "No medir progreso: usa indicadores por sesión (RC, evitación, tiempo de permanencia, transferencias)."
+      ],
+      text: ""
+    }
+  ],
       },
       {
         id: "2.7",
