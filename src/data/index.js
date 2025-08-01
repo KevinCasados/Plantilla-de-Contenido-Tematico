@@ -4,6 +4,7 @@ import * as dec  from './doctorado-educacion/dec'; // Diseño y Evaluación Curr
 import * as pddpe  from './doctorado-educacion/pddpe'; // Practica Docente desde la Perspectiva Evaluadora 
 import * as arh  from './maestria-administracion-rh/arh';
 import * as pbcc  from './maestria-psicologia-clinica/pbcc'; // Psicoterapia Breve Conductivo-Conceptual
+import * as ieie  from './maestria-educacion/ieie'; // Implicaciones Educativas de la Inteligencia Emocional
 
 export const programs = {
   'doctorado-educacion': {
@@ -19,6 +20,11 @@ export const programs = {
 
   'maestria-psicologia-clinica': {
     pbcc,             // Psicoterapia Breve Conductivo-Conceptual
+    // otras materias…
+  },
+
+  'maestria-educacion': {
+    ieie,             // Implicaciones Educativas de la Inteligencia Emocional
     // otras materias…
   },
   // otros programas…
