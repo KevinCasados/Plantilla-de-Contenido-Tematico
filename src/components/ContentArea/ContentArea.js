@@ -27,6 +27,14 @@ import {
   ReadingBox,
 } from "./ContentArea.styles";
 
+// --- Sanitizador de citas incrustadas ---
+const sanitize = (s = "") =>
+  s
+    // quita marcadores tipo :contentReference[oaicite:28]{index=28}
+    .replace(/:contentReference\[oaicite:\d+\]\{index=\d+\}/g, "")
+    // por si quedaron citas en corchetes de otra variante
+    .replace(/【[^】]*】/g, "");
+
 function ContentArea({
   unit,
   theme,
@@ -166,7 +174,7 @@ function ContentArea({
                 {listBlock.items.map((it, i) => (
                   <li
                     key={i}
-                    dangerouslySetInnerHTML={{ __html: marked.parseInline(it) }}
+                    dangerouslySetInnerHTML={{ __html: marked.parseInline(sanitize(it)) }}
                   />
                 ))}
               </Unordered>
@@ -192,7 +200,7 @@ function ContentArea({
                     key={key}
                     className="sr-item"
                     dangerouslySetInnerHTML={{
-                      __html: marked.parse(block.text),
+                      __html: marked.parse(sanitize(block.text)),
                     }}
                   />
                 );
@@ -241,7 +249,7 @@ function ContentArea({
                           <li
                             key={i}
                             dangerouslySetInnerHTML={{
-                              __html: marked.parseInline(it),
+                              __html: marked.parseInline(sanitize(it))
                             }}
                           />
                         ))}
@@ -257,7 +265,7 @@ function ContentArea({
                       <li
                         key={i}
                         dangerouslySetInnerHTML={{
-                          __html: marked.parseInline(it),
+                          __html: marked.parseInline(sanitize(it)),
                         }}
                       />
                     ))}
@@ -306,7 +314,7 @@ function ContentArea({
                     {isOpen && (
                       <AccordionContent
                         dangerouslySetInnerHTML={{
-                          __html: marked.parse(md || ""),
+                          __html: marked.parse(sanitize(md || "")),
                         }}
                       />
                     )}
