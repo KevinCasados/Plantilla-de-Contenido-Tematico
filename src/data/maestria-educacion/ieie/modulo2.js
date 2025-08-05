@@ -482,7 +482,7 @@ subthemes: [
         {
           type: "download", // reutilizamos el mismo bloque
           text: "Ver video complementario",
-          href: "https://www.youtube.com/watch?v=ldhpS8R5ods", // vídeo hallado en el PDF
+          href: "https://youtu.be/Zs1cxNnU2Do", // vídeo hallado en el PDF
           openInNewTab: true, // ← abre en pestaña nueva
           icon: "https://lottie.host/64720b92-74e2-49a6-8137-a43976b8cba3/oEkht7b3Pb.json",
         },
@@ -492,11 +492,11 @@ subthemes: [
           type: "list",
           style: "unordered",
           items: [
-            "¿Qué es el diseño curricular? ✔ [Concepto, Autores y Antecedentes] https://www.youtube.com/watch?v=ldhpS8R5ods",
-            "Diseño Curricular QUÉ ES y CÓMO se HACE EJEMPLOS https://www.youtube.com/watch?v=3IOkwLKyHNE",
-            "Evaluación Curricular Interna Y Externa || Nitzia Tavarez || https://www.youtube.com/watch?v=OR6YlkxNtps",
-            //  Añade aquí las referencias reales extraídas del PDF
-          ],
+  "El modelo de la Inteligencias Múltiples de Howard Gardner — Video https://youtu.be/N7cbzje3Rb4",
+  "IEIE-Sem2 — Video https://youtu.be/Zs1cxNnU2Do",
+  "Las múltiples inteligencias — Artículo (Redalyc) https://www.redalyc.org/pdf/213/21301003.pdf",
+  "Las inteligencias múltiples como una estrategia didáctica para atender la diversidad y aprovechar el potencial de todos los alumnos — Artículo (Dialnet) https://dialnet.unirioja.es/descarga/articulo/5446538.pdf",
+],
         },
       ],
     },
@@ -511,13 +511,17 @@ subthemes: [
           type: "list",
           style: "unordered",
           items: [
-            "Coll, C. & Solé, I. (2020). *Currículum y evaluación en la educación obligatoria: Desafíos y perspectivas.* Barcelona: Editorial Graó.",
-            "Perrenoud, P. (2019). *La evaluación de los alumnos: De la producción de la excelencia a la regulación de los aprendizajes.* Madrid: Editorial Morata.",
-            "De Alba Ceballos, A. (2018). *Teoría curricular: Nuevas tendencias y perspectivas.* Ciudad de México: Siglo XXI Editores.",
-            "Díaz Barriga, A. (2018). *Metodología de diseño curricular: Un enfoque centrado en competencias.* Ciudad de México: Editorial Trillas.",
-            "Gimeno Sacristán, J. (2017). *El currículum: Una reflexión sobre la práctica.* Madrid: Ediciones Morata.",
-            "Zabalza, M. Á. (2019). *Diseño y desarrollo curricular: Cómo planificar e implementar el currículo en la educación superior.* Madrid: Narcea Ediciones.",
-          ],
+  "Antunes, C. (2003). *¿Cómo desarrollar contenidos aplicando las Inteligencias Múltiples?* Buenos Aires: Narcea.",
+  "Arancibia, V., Herrera, P., & Strasser, K. (2007). *Manual de psicología educacional.* Santiago: Digitalia.",
+  "Bisquerra Alzina, R. (2009). *Psicopedagogía de las emociones.* Madrid: Editorial Síntesis.",
+  "Gardner, H. (1983). *Inteligencias múltiples.* Buenos Aires: Paidós.",
+  "Gardner, H. (2008). *Inteligencias múltiples. La teoría en la práctica.* Buenos Aires: Paidós.",
+  "Gardner, H. (2010). *La inteligencia reformulada: las inteligencias múltiples en el siglo XXI.* Barcelona: Paidós.",
+  "Gardner, H. (2014). *Inteligencias múltiples. La teoría en la práctica.* Barcelona: Paidós.",
+  "Pallarés, M. (2010). *Emociones y sentimientos: Dónde se forman y cómo se transforman.* Barcelona: Marge Books.",
+  "Triglia, A., Regader, B., & García-Allen, J. (2018). *¿Qué es la inteligencia? Del CI a las inteligencias múltiples.* Barcelona: EMSE.",
+  "Woolfolk, A. (2010). *Psicología educativa.* México: Pearson.",
+],
         },
 
         /* ⬇⬇ NUEVO bloque para la animación ⬇⬇ */
