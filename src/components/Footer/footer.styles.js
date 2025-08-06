@@ -13,6 +13,7 @@ export const FooterContainer = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
+  max-width: 1810px;
 
   @media (max-width: 1200px) {
     flex-direction: column;
@@ -21,6 +22,7 @@ export const FooterContainer = styled.div`
 `;
 
 export const FooterLeft = styled.div`
+display: none;
   flex: 2;  /* Esto hace que la primera columna sea más ancha */
 
   @media (max-width: 1200px) {
