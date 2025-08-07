@@ -7,6 +7,7 @@ import * as pbcc  from './maestria-psicologia-clinica/pbcc'; // Psicoterapia Bre
 import * as ieie  from './maestria-educacion/ieie'; // Implicaciones Educativas de la Inteligencia Emocional
 import * as dpc  from './maestria-educacion/dpc'; // Didactica de los Procesos Cognitivos
 import * as pae  from './maestria-educacion/pae'; // Didactica de los Procesos Cognitivos
+import * as aie  from './maestria-gestion-aie/aie'; // Administración de Instituciones Educativas
 
 export const programs = {
   'doctorado-educacion': {
@@ -29,6 +30,11 @@ export const programs = {
     ieie,             // Implicaciones Educativas de la Inteligencia Emocional
     dpc, // Didactica de los Procesos Cognitivos
     pae, // Paradigmas Actuales de la enseñanza
+    // otras materias…
+  },
+
+  'maestria-gestion-aie': {
+    aie,             // Administración de Instituciones Educativas
     // otras materias…
   },
   // otros programas…
