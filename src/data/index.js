@@ -8,6 +8,7 @@ import * as ieie  from './maestria-educacion/ieie'; // Implicaciones Educativas 
 import * as dpc  from './maestria-educacion/dpc'; // Didactica de los Procesos Cognitivos
 import * as pae  from './maestria-educacion/pae'; // Didactica de los Procesos Cognitivos
 import * as aie  from './maestria-gestion-aie/aie'; // Administración de Instituciones Educativas
+import * as ieie207  from './especialdad-formacion-docente/ieie'; // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
 
 export const programs = {
   'doctorado-educacion': {
@@ -27,7 +28,7 @@ export const programs = {
   },
 
   'maestria-educacion': {
-    ieie,             // Implicaciones Educativas de la Inteligencia Emocional
+    ieie, // Implicaciones Educativas de la Inteligencia Emocional
     dpc, // Didactica de los Procesos Cognitivos
     pae, // Paradigmas Actuales de la enseñanza
     // otras materias…
@@ -35,6 +36,11 @@ export const programs = {
 
   'maestria-gestion-aie': {
     aie,             // Administración de Instituciones Educativas
+    // otras materias…
+  },
+
+  'especialidad-formacion-docente': {
+    ieie207,             // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
     // otras materias…
   },
   // otros programas…
