@@ -9,6 +9,7 @@ import * as dpc  from './maestria-educacion/dpc'; // Didactica de los Procesos C
 import * as pae  from './maestria-educacion/pae'; // Didactica de los Procesos Cognitivos
 import * as aie  from './maestria-gestion-aie/aie'; // Administración de Instituciones Educativas
 import * as ieie207  from './especialdad-formacion-docente/ieie'; // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
+import * as ddpe  from './maestria-gestion-aie/ddpe';  // Diseño y Desarrollo de Proyectos Educativos
 
 export const programs = {
   'doctorado-educacion': {
@@ -36,6 +37,7 @@ export const programs = {
 
   'maestria-gestion-aie': {
     aie,             // Administración de Instituciones Educativas
+    ddpe,            // Diseño y Desarrollo de Proyectos Educativos
     // otras materias…
   },
 
