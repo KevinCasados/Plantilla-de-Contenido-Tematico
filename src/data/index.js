@@ -10,6 +10,7 @@ import * as pae  from './maestria-educacion/pae'; // Didactica de los Procesos C
 import * as aie  from './maestria-gestion-aie/aie'; // Administración de Instituciones Educativas
 import * as ieie207  from './especialdad-formacion-docente/ieie'; // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
 import * as ddpe  from './maestria-gestion-aie/ddpe';  // Diseño y Desarrollo de Proyectos Educativos
+import * as mp  from './maestria-gobiernos-ap/mp';  // Mercadotecnia Política
 
 export const programs = {
   'doctorado-educacion': {
@@ -43,6 +44,11 @@ export const programs = {
 
   'especialidad-formacion-docente': {
     ieie207,             // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
+    // otras materias…
+  },
+
+   'maestria-gobierno-asuntos-publicos': {
+    mp,             // Mercadotecnia Política 
     // otras materias…
   },
   // otros programas…
