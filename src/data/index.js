@@ -11,6 +11,7 @@ import * as aie  from './maestria-gestion-aie/aie'; // Administración de Instit
 import * as ieie207  from './especialdad-formacion-docente/ieie'; // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
 import * as ddpe  from './maestria-gestion-aie/ddpe';  // Diseño y Desarrollo de Proyectos Educativos
 import * as mp  from './maestria-gobiernos-ap/mp';  // Mercadotecnia Política
+import * as ii  from './maestria-impuestos/ii';  // Impuestos Internacionales
 
 export const programs = {
   'doctorado-educacion': {
@@ -49,6 +50,11 @@ export const programs = {
 
    'maestria-gobierno-asuntos-publicos': {
     mp,             // Mercadotecnia Política 
+    // otras materias…
+  },
+
+  'maestria-impuestos': {
+    ii,             // Impuestos Internacionales
     // otras materias…
   },
   // otros programas…
