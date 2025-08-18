@@ -1,19 +1,24 @@
 /* Índice maestro de todos los programas */
-import * as mifd from './doctorado-educacion/mifd'; // Modelo Integrador de Formación Docente
-import * as dec  from './doctorado-educacion/dec'; // Diseño y Evaluación Curricular
-import * as pddpe  from './doctorado-educacion/pddpe'; // Practica Docente desde la Perspectiva Evaluadora 
-import * as arh  from './maestria-administracion-rh/arh';
-import * as pbcc  from './maestria-psicologia-clinica/pbcc'; // Psicoterapia Breve Conductivo-Conceptual
-import * as ieie  from './maestria-educacion/ieie'; // Implicaciones Educativas de la Inteligencia Emocional
-import * as dpc  from './maestria-educacion/dpc'; // Didactica de los Procesos Cognitivos
-import * as pae  from './maestria-educacion/pae'; // Didactica de los Procesos Cognitivos
-import * as aie  from './maestria-gestion-aie/aie'; // Administración de Instituciones Educativas
-import * as ieie207  from './especialdad-formacion-docente/ieie'; // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
-import * as ddpe  from './maestria-gestion-aie/ddpe';  // Diseño y Desarrollo de Proyectos Educativos
-import * as mp  from './maestria-gobiernos-ap/mp';  // Mercadotecnia Política
-import * as ii  from './maestria-impuestos/ii';  // Impuestos Internacionales
+import * as mifd from './posgrados/doctorado-educacion/mifd'; // Modelo Integrador de Formación Docente
+import * as dec  from './posgrados/doctorado-educacion/dec'; // Diseño y Evaluación Curricular
+import * as pddpe  from './posgrados/doctorado-educacion/pddpe'; // Practica Docente desde la Perspectiva Evaluadora 
+import * as arh  from './posgrados/maestria-administracion-rh/arh';
+import * as pbcc  from './posgrados/maestria-psicologia-clinica/pbcc'; // Psicoterapia Breve Conductivo-Conceptual
+import * as ieie  from './posgrados/maestria-educacion/ieie'; // Implicaciones Educativas de la Inteligencia Emocional
+import * as dpc  from './posgrados/maestria-educacion/dpc'; // Didactica de los Procesos Cognitivos
+import * as pae  from './posgrados/maestria-educacion/pae'; // Didactica de los Procesos Cognitivos
+import * as aie  from './posgrados/maestria-gestion-aie/aie'; // Administración de Instituciones Educativas
+import * as ieie207  from './posgrados/especialdad-formacion-docente/ieie'; // Implicaciones Educativas de la Inteligencia Emocional (EFD 207) 
+import * as ddpe  from './posgrados/maestria-gestion-aie/ddpe';  // Diseño y Desarrollo de Proyectos Educativos
+import * as mp  from './posgrados/maestria-gobiernos-ap/mp';  // Mercadotecnia Política
+import * as ii  from './posgrados/maestria-impuestos/ii';  // Impuestos Internacionales
+import * as adm_1  from './licenciaturas/administracion/adm-1'; // Administración - I
+import * as ied  from './licenciaturas/derecho/ied'; // Introducción al Estudio del Derecho
+
+
 
 export const programs = {
+  /* --------------------- POSGRADOS --------------------- */
   'doctorado-educacion': {
     mifd,            // Modelo Integrador de Formación Docente
     dec,             // Diseño y Evaluación Curricular
@@ -57,5 +62,17 @@ export const programs = {
     ii,             // Impuestos Internacionales
     // otras materias…
   },
+
+  /* --------------------- LICENCIATURAS --------------------- */
+  'licenciatura-administracion': {
+    adm_1,             // Administración - I
+    // otras materias…
+  },
+
+   'licenciatura-derecho': {
+    ied,             // introducción al Estudio del Derech
+    // otras materias…
+  },
+
   // otros programas…
 };
