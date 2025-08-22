@@ -7,11 +7,11 @@ const basePath =
 export default {
   /* ── Metadatos ──────────────────────────────── */
   programId: "lic-derecho",
-  courseId: "introduccion-al-estudio-del-derecho",
+  courseId: "Derecho Civil III",
   id: "modulo4-clasificacion-estado-ramas-conceptos",
 
   /* ── Datos visibles ─────────────────────────── */
-  courseName: "Introducción al Estudio del Derecho",
+  courseName: "Derecho Civil III",
   title:
     "Módulo 4. Clasificación de normas, Estado de derecho y ramas del Derecho",
   semestre: "Semestre 1",
