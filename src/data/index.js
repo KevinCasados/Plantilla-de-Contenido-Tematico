@@ -14,7 +14,8 @@ import * as mp  from './posgrados/maestria-gobiernos-ap/mp';  // Mercadotecnia P
 import * as ii  from './posgrados/maestria-impuestos/ii';  // Impuestos Internacionales
 import * as adm_1  from './licenciaturas/administracion/adm-1'; // Administración - I
 import * as ied  from './licenciaturas/derecho/ied'; // Introducción al Estudio del Derecho
-import * as dc_III  from './licenciaturas/derecho/dc-III'; // Introducción al Estudio del Derecho
+import * as dc_III  from './licenciaturas/derecho/dc-III'; // Derecho Civil III
+import * as dc_V  from './licenciaturas/derecho/dc-V'; // Derecho Civil V
 
 
 
@@ -73,6 +74,7 @@ export const programs = {
    'licenciatura-derecho': {
     ied,             // introducción al Estudio del Derech
     dc_III,             // Derecho Civil III
+    dc_V,             // Derecho Civil III
     // otras materias…
   },
 

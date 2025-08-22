@@ -7,11 +7,11 @@ const basePath =
 export default {
   /* ── Metadatos ──────────────────────────────── */
   programId: "lic-derecho",
-  courseId: "introduccion-al-estudio-del-derecho",
+  courseId: "Derecho Civil III",
   id: "modulo1-funcion-social-y-nociones",
 
   /* ── Datos visibles ─────────────────────────── */
-  courseName: "Introducción al Estudio del Derecho",
+  courseName: "Derecho Civil III",
   title: "Módulo 1. Función social del Derecho y nociones fundamentales",
   semestre: "Semestre 1",
   teacher: "Dr. José Valentín Ramos Fajardo",
