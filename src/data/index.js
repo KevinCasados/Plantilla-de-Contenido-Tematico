@@ -16,6 +16,7 @@ import * as adm_1  from './licenciaturas/administracion/adm-1'; // Administraci�
 import * as ied  from './licenciaturas/derecho/ied'; // Introducción al Estudio del Derecho
 import * as dc_III  from './licenciaturas/derecho/dc-III'; // Derecho Civil III
 import * as dc_V  from './licenciaturas/derecho/dc-V'; // Derecho Civil V
+import * as df_II  from './licenciaturas/derecho/df-II'; // Derecho Fiscal II
 
 
 
@@ -75,6 +76,7 @@ export const programs = {
     ied,             // introducción al Estudio del Derech
     dc_III,             // Derecho Civil III
     dc_V,             // Derecho Civil III
+    df_II,             // Derecho Fiscal II
     // otras materias…
   },
 
