@@ -17,7 +17,7 @@ import * as ied  from './licenciaturas/derecho/ied'; // Introducción al Estudio
 import * as dc_III  from './licenciaturas/derecho/dc-III'; // Derecho Civil III
 import * as dc_V  from './licenciaturas/derecho/dc-V'; // Derecho Civil V
 import * as df_II  from './licenciaturas/derecho/df-II'; // Derecho Fiscal II
-
+import * as audi_I  from './licenciaturas/contaduria-publica/audi-I'; // Auditoría I
 
 
 export const programs = {
@@ -79,6 +79,11 @@ export const programs = {
     df_II,             // Derecho Fiscal II
     // otras materias…
   },
+
+  'licenciatura-contaduria-publica': {
+    audi_I,             // Administración - I
+    // otras materias…
+  }
 
   // otros programas…
 };
