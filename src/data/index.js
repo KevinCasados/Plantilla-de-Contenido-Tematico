@@ -18,6 +18,7 @@ import * as dc_III  from './licenciaturas/derecho/dc-III'; // Derecho Civil III
 import * as dc_V  from './licenciaturas/derecho/dc-V'; // Derecho Civil V
 import * as df_II  from './licenciaturas/derecho/df-II'; // Derecho Fiscal II
 import * as audi_I  from './licenciaturas/contaduria-publica/audi-I'; // Auditoría I
+import * as arh_527  from './licenciaturas/contaduria-publica/arh'; // Administración de Recursos Humanos
 
 
 export const programs = {
@@ -82,6 +83,7 @@ export const programs = {
 
   'licenciatura-contaduria-publica': {
     audi_I,             // Administración - I
+    arh_527,            // Administración de Recursos Humanos
     // otras materias…
   }
 
