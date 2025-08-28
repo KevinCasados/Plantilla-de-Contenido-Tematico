@@ -19,6 +19,10 @@ import * as dc_V  from './licenciaturas/derecho/dc-V'; // Derecho Civil V
 import * as df_II  from './licenciaturas/derecho/df-II'; // Derecho Fiscal II
 import * as audi_I  from './licenciaturas/contaduria-publica/audi-I'; // Auditoría I
 import * as arh_527  from './licenciaturas/contaduria-publica/arh'; // Administración de Recursos Humanos
+import * as deor  from './licenciaturas/psicologia/deor'; // Desarrollo Organizacional
+import * as ied_105  from './licenciaturas/administracion/ied-105'; // Introducción al Estudio del Derecho
+import * as info_I  from './licenciaturas/derecho/info-I'; // Informática I
+
 
 
 export const programs = {
@@ -70,6 +74,7 @@ export const programs = {
   /* --------------------- LICENCIATURAS --------------------- */
   'licenciatura-administracion': {
     adm_1,             // Administración - I
+    ied_105,            // Introducción al Estudio del Derecho
     // otras materias…
   },
 
@@ -78,12 +83,18 @@ export const programs = {
     dc_III,             // Derecho Civil III
     dc_V,             // Derecho Civil III
     df_II,             // Derecho Fiscal II
+    info_I,             // Informática I
     // otras materias…
   },
 
   'licenciatura-contaduria-publica': {
     audi_I,             // Administración - I
     arh_527,            // Administración de Recursos Humanos
+    // otras materias…
+  },
+
+  'licenciatura-psicologia': {
+    deor,            // Desarrollo Organizacional
     // otras materias…
   }
 
