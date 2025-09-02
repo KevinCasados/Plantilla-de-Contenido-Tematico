@@ -56,18 +56,22 @@ function Sidebar({
     return (
       <li key={id}>
         <ItemComponent
-          $active={nodeIsActive(node)}
-          onClick={() => {
-            if (hasChildren) toggleExpand(id);
-            onThemeSelect(id);
-          }}
-        >
-          <span>{label}</span>
+  $active={nodeIsActive(node)}
+  onClick={() => onThemeSelect(id)}   // ✅ solo selecciona el tema
+>
+  <span>{label}</span>
 
-          {hasChildren && (
-            <ExpandIcon>{expandedThemes[id] ? '▼' : '►'}</ExpandIcon>
-          )}
-        </ItemComponent>
+  {hasChildren && (
+    <ExpandIcon
+      onClick={(e) => {
+        e.stopPropagation(); // ✅ evita que se dispare la selección
+        toggleExpand(id);    // ✅ solo abre/cierra subtemas
+      }}
+    >
+      {expandedThemes[id] ? '▼' : '►'}
+    </ExpandIcon>
+  )}
+</ItemComponent>
 
         {hasChildren && expandedThemes[id] && (
           <SubthemesList>
