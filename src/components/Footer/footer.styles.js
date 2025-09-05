@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FooterWrapper = styled.footer`
+display: none; /* Quitar esto cuando se quiera mostrar de nuevo el footer */
   background: linear-gradient(0deg, #213944 8.31%, #000000 88.22%);
   color: #fff;
   padding: 25px 22px;
