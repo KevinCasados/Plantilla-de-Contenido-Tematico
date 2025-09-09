@@ -11,7 +11,7 @@ export default {
   id: "modulo4",
 
   /* ── Datos visibles ─────────────────────────── */
-  courseName: "Maestría en Educación",
+  courseName: "Paradigmas actuales de la enseñanza",
   title: "Módulo 4. Modelo de acción, interacción y construcción",
   semestre: "4º semestre", // :contentReference[oaicite:0]{index=0}
   teacher: "Mtra. Lucila Yolanda Sánchez Orea", // :contentReference[oaicite:1]{index=1}

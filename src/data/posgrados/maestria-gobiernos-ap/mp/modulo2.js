@@ -41,7 +41,7 @@ export default {
     /* 1. Unidad principal */
     {
       id: "1",
-      numbering: "Unidad 1",
+      numbering: "Unidad 2 y 3",
       title: "Campo político y ética",
       content: [
         {
