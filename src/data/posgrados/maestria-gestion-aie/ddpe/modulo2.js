@@ -12,7 +12,7 @@ export default {
 
   /* ── Datos visibles ─────────────────────────── */
   courseName:
-    "Maestría en Gestión y Administración de Instituciones Educativas", // :contentReference[oaicite:2]{index=2}
+    "Diseño y desarrollo de proyectos educativos", // :contentReference[oaicite:2]{index=2}
   title: "Módulo 2. Diagnóstico del estado de la institución", // :contentReference[oaicite:3]{index=3}
   semestre: "Tercer semestre", // :contentReference[oaicite:4]{index=4}
   teacher: "Dr. Jesús Agustín Zapata Velázquez", // :contentReference[oaicite:5]{index=5}

@@ -41,7 +41,7 @@ export default {
     /* 1. Unidad principal (mapeo desde Unidad 5 del material) */
     {
       id: "1",
-      numbering: "Unidad 1",
+      numbering: "Unidad 5",
       title: "Publicidad y propaganda",
       content: [
         {

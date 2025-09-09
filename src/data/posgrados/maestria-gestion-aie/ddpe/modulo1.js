@@ -12,7 +12,7 @@ export default {
 
   /* ── Datos visibles ─────────────────────────── */
   courseName:
-    "Maestría en Gestión y Administración de Instituciones Educativas",
+    "Diseño y desarrollo de proyectos educativos",
   title: "Módulo 1. Métodos y herramientas para el diseño del proyecto", // :contentReference[oaicite:0]{index=0}
   semestre: "3.er Semestre", // :contentReference[oaicite:1]{index=1}
   teacher: "Dr. Jesús Agustín Zapata Velázquez", // :contentReference[oaicite:2]{index=2}

@@ -11,7 +11,7 @@ export default {
   id: "modulo3",
 
   /* ── Datos visibles ─────────────────────────── */
-  courseName: "Maestría en Educación",
+  courseName: "Paradigmas actuales de la enseñanza",
   title: "Módulo 3. La función del docente para la transformación educativa",
   semestre: "4º semestre",
   teacher: "Mtra. Lucila Yolanda Sánchez Orea",
